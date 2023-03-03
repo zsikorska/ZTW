@@ -64,6 +64,24 @@ function add_random_ad_after_title($content){
     return $content = '<div>' .$ad_list[$random_key] . '</div> <br>' . $content;
 }
 
-add_filter("the_content", "add_random_ad_after_title", 10, 2);
+add_filter("the_content", "add_random_ad_after_title");
+
+function remove_ad_filter($content)
+{
+    if (has_filter( 'the_content', 'add_random_ad_after_title' ))
+    {
+        remove_filter( 'the_content', 'add_random_ad_after_title' ); 
+    }
+    return $content;
+}
+add_filter('get_the_excerpt', 'remove_ad_filter', 9); //priority needs to be lower than that of wp_trim_excerpt, which has priority of 10. Otherwise, it will still be triggered for the first post in the loop. 
+
+function readd_ad_filter($content)
+{
+    add_filter( 'the_content', 'add_random_ad_after_title' ); 
+    return $content;
+}
+add_filter('get_the_excerpt', 'readd_ad_filter', 11); //priority needs to be higher than that of wp_trim_excerpt, which has priority of 10.
+
 
 ?>
