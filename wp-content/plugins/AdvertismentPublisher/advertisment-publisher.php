@@ -5,14 +5,6 @@
  * Version: 1.0
  * Author: Magdalena Nowicka, Zuzanna Sikorska
 */
-?>
-<script>
-function scrollToEditor() {
-  const element = document.getElementById("ad_form");
-  element.scrollIntoView();
-}
-</script>
-<?php
 
 function ad_pub_admin_actions_register_menu(){
     add_options_page("Advertisment Publisher", "Advertisment Publisher", 'manage_options', "ad-pub", "ad_pub_admin_page");
