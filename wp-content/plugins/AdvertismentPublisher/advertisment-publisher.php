@@ -5,7 +5,14 @@
  * Version: 1.0
  * Author: Magdalena Nowicka, Zuzanna Sikorska
 */
-
+?>
+<script>
+function scrollToEditor() {
+  const element = document.getElementById("ad_form");
+  element.scrollIntoView();
+}
+</script>
+<?php
 
 function ad_pub_admin_actions_register_menu(){
     add_options_page("Advertisment Publisher", "Advertisment Publisher", 'manage_options', "ad-pub", "ad_pub_admin_page");
@@ -19,46 +26,73 @@ if(!get_option('ads')) {
     update_option('ads', $ad_list);
 }
 
-
 function ad_pub_admin_page(){
+    $editor_content = "";
     $ad_list = get_option('ads');
-    update_option('ads', $ad_list);
-    if(isset($_POST['new_ad'])){
-        if(strlen($_POST['new_ad'])>0){
-            echo '<div class="notice notice-success is-dismissible"><p>Settings saved.</p></div>';
-            array_push($ad_list, wp_kses_post( stripslashes($_POST['new_ad'])));
+    if(isset($_POST['ad_content'])){
+        if(strlen($_POST['ad_content'])>0){
+            $formattedContent = wp_kses_post(stripslashes($_POST['ad_content']));
+            if(isset($_POST['ad_id'])) {
+                $ad_list[$_POST['ad_id']] = $formattedContent;
+            } else {                
+                array_push($ad_list, $formattedContent);
+            }
             update_option('ads', $ad_list);
+            unset($_POST['ad_id']);
+
+            echo '<div class="notice notice-success is-dismissible"><p>Settings saved.</p></div>';
         }
         else{
             echo '<div class="notice notice-info is-dismissible"><p>Ad can not be without text.</p></div>';
         }
-    }
+    } else if (isset($_POST['ad_id'])){
+        $ad_id = $_POST['ad_id'];
+        switch($_POST['subject']) {
+
+            case 'edit': 
+                $editor_content = $ad_list[$ad_id];
+                ?>
+                <script type="text/javascript">scrollToEditor();</script>
+                <?php
+
+                break;
+        
+            case 'delete': 
+                array_splice($ad_list, $ad_id, 1);
+                update_option('ads', $ad_list);
+                break;
+            }
+        }
 ?>
-    <h1> Page to manage ads in progress...</h1>
+    <h1> Advertisment publisher</h1>
+    <div class="wrap">
+        <h1>Add/edit advertisment</h1>
+        <form name="ad_form" id="ad_form" method="post">
+                <?php if(isset($_POST['ad_id'])) echo ("<input type=\"hidden\" name=\"ad_id\"  value={$_POST['ad_id']}>");
+                else echo ("<input type=\"hidden\" name=\"ad_id\" disabled>");
+                ?>
+        <?php
+            wp_editor($editor_content, "ad_content", [])
+        ?>
+            <input type="submit" value=<?php if(isset($_POST['ad_id'])) echo "Save"; else echo "Submit";?>>
+            <input class="submit" type="reset" value="Reset">
+        </form>
+    </div>
     <h2>Advertisments</h2>
 <?php
     $ad_list = get_option('ads');
-    var_dump($ad_list);
+    // var_dump($ad_list);
     for($i = 0; $i < count($ad_list); ++$i) {
         echo "<p> $ad_list[$i]</p>";
         ?>
-        <input type="button" value="Edit">
-        <input type="button" value="Delete">
+        <form name="ad_edit_delete_form" method="post">
+            <input type="hidden" name="ad_id" value="<?php echo $i ?>">
+            <button name="subject" value="delete">Delete</button>
+            <button name="subject" value="edit">Edit</button>
+        </form>
         <?php
     }
-?>
-    <div class="wrap">
-        <h1>Add new advertisment</h1>
-        <form name="ad_form" method="post">
-        <?php
-            wp_editor("", "new_ad", [])
-        ?>
-            <!-- <textarea name="new_ad" id="new_ad" rows="3"></textarea> -->
-            <p class="submit"><input type="submit" value="Submit"></p>
-        </form>
-    </div>
 
-<?php
 }
 
 function add_random_ad_after_title($content){
