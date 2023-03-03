@@ -26,7 +26,7 @@ function ad_pub_admin_page(){
     if(isset($_POST['new_ad'])){
         if(strlen($_POST['new_ad'])>0){
             echo '<div class="notice notice-success is-dismissible"><p>Settings saved.</p></div>';
-            array_push($ad_list, $_POST['new_ad']);
+            array_push($ad_list, wp_kses_post( stripslashes($_POST['new_ad'])));
             update_option('ads', $ad_list);
         }
         else{
@@ -38,6 +38,7 @@ function ad_pub_admin_page(){
     <h2>Advertisments</h2>
 <?php
     $ad_list = get_option('ads');
+    var_dump($ad_list);
     for($i = 0; $i < count($ad_list); ++$i) {
         echo "<p> $ad_list[$i]</p>";
         ?>
@@ -49,7 +50,10 @@ function ad_pub_admin_page(){
     <div class="wrap">
         <h1>Add new advertisment</h1>
         <form name="ad_form" method="post">
-            <textarea name="new_ad" id="new_ad" rows="3"></textarea>
+        <?php
+            wp_editor("", "new_ad", [])
+        ?>
+            <!-- <textarea name="new_ad" id="new_ad" rows="3"></textarea> -->
             <p class="submit"><input type="submit" value="Submit"></p>
         </form>
     </div>
