@@ -12,17 +12,26 @@ function ad_pub_admin_actions_register_menu(){
 }
 
 add_action('admin_menu', 'ad_pub_admin_actions_register_menu');
+
+
 if(!get_option('ads')) {
     $ad_list = array("One", "Two", "Three");
     update_option('ads', $ad_list);
 }
+
+
 function ad_pub_admin_page(){
     $ad_list = get_option('ads');
     update_option('ads', $ad_list);
     if(isset($_POST['new_ad'])){
-        echo '<div class="notice notice-success is-dismissible"><p>Settings saved.</p></div>';
-        array_push($ad_list, $_POST['new_ad']);
-        update_option('ads', $ad_list);
+        if(strlen($_POST['new_ad'])>0){
+            echo '<div class="notice notice-success is-dismissible"><p>Settings saved.</p></div>';
+            array_push($ad_list, $_POST['new_ad']);
+            update_option('ads', $ad_list);
+        }
+        else{
+            echo '<div class="notice notice-info is-dismissible"><p>Ad can not be without text.</p></div>';
+        }
     }
 ?>
     <h1> Page to manage ads in progress...</h1>
@@ -31,6 +40,10 @@ function ad_pub_admin_page(){
     $ad_list = get_option('ads');
     for($i = 0; $i < count($ad_list); ++$i) {
         echo "<p> $ad_list[$i]</p>";
+        ?>
+        <input type="button" value="Edit">
+        <input type="button" value="Delete">
+        <?php
     }
 ?>
     <div class="wrap">
