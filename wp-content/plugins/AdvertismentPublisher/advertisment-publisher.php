@@ -34,6 +34,9 @@ function ad_pub_admin_page(){
             }
             update_option('ads', $ad_list);
             unset($_POST['ad_id']);
+            $selected_start_time = "";
+            $selected_end_time = "";
+
 
             echo '<div class="notice notice-success is-dismissible"><p>Settings saved.</p></div>';
         }
@@ -78,23 +81,43 @@ function ad_pub_admin_page(){
             <input class="submit" type="reset" value="Reset">
         </form>
     </div>
-    <h2>Advertisments</h2>
+    <br><br>
+    <h1>Advertisments:</h1>
 <?php
     $ad_list = get_option('ads');
     // var_dump($ad_list);
+
+    ?>
+    <table>
+        <tr>
+            <th>Content</th>
+            <th>Start time</th>
+            <th>End time</th>
+            <th>Actions</th>
+        </tr>
+    <?php
     for($i = 0; $i < count($ad_list); ++$i) {
         $content = $ad_list[$i]['content'];
         $start_time = $ad_list[$i]['start_time'];
         $end_time = $ad_list[$i]['end_time'];
-        echo "<p> $content $start_time $end_time</p>";
         ?>
-        <form name="ad_edit_delete_form" method="post">
-            <input type="hidden" name="ad_id" value="<?php echo $i ?>">
-            <button name="subject" value="delete">Delete</button>
-            <button name="subject" value="edit">Edit</button>
-        </form>
+        <tr>
+            <td><?php echo $content ?></td>
+            <td><?php echo $start_time ?></td>
+            <td><?php echo $end_time ?></td>
+            <td>
+                <form name="ad_edit_delete_form" method="post">
+                    <input type="hidden" name="ad_id" value="<?php echo $i ?>">
+                    <button class="edit" name="subject" value="edit">Edit</button>
+                    <button class="delete" name="subject" value="delete">Delete</button>
+                </form>
+            </td>
+        </tr>
         <?php
     }
+    ?>
+    </table>
+    <?php
 }
 
 

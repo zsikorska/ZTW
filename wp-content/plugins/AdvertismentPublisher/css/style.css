@@ -7,3 +7,42 @@
 .ad:hover {
     border: 2px solid #601c1c;
 }
+
+table {
+    border-collapse: collapse;
+    width: 90%;
+  }
+  
+td, th {
+    border: 1px solid #d3d1d1;
+    padding: 7px;
+    text-align: center;
+  }
+  
+.edit {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+.delete {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  
