@@ -113,7 +113,7 @@ function add_random_ad_after_title($content){
 
     if (count($matching_ads) > 0) {
         $random_key = random_int(0, count($matching_ads) - 1 );
-        return $content = '<div>' .$matching_ads[$random_key]['content'] . '</div> <br>' . $content;
+        return $content = '<div class="ad">' .$matching_ads[$random_key]['content'] . '</div> <br>' . $content;
     } else {
         return $content;
     }
@@ -140,5 +140,13 @@ function readd_ad_filter($content)
 }
 add_filter('get_the_excerpt', 'readd_ad_filter', 11); //priority needs to be higher than that of wp_trim_excerpt, which has priority of 10.
 
+function register_styles(){
+    //register style
+    wp_register_style('styles', plugins_url('/css/style.css', __FILE__));
+    //enable style (load in meta of html)
+    wp_enqueue_style('styles');
+}
+
+add_action('init', 'register_styles'); 
 
 ?>
