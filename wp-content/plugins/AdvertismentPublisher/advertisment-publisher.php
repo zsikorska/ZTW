@@ -59,6 +59,7 @@ function ad_pub_admin_page(){
             case 'delete': 
                 array_splice($ad_list, $ad_id, 1);
                 update_option('ads', $ad_list);
+                echo '<div class="notice notice-success is-dismissible"><p>Settings saved.</p></div>';
                 break;
             }
         }
@@ -77,8 +78,8 @@ function ad_pub_admin_page(){
             <input type="time" id="ad_start_time" name="ad_start_time" value="<?php echo $selected_start_time ?>">
             <label for="ad_end_time">End time:</label>
             <input type="time" id="ad_end_time" name="ad_end_time" value="<?php echo $selected_end_time ?>">
-            <input type="submit" value=<?php if(isset($_POST['ad_id'])) echo "Save"; else echo "Submit";?>>
-            <input class="submit" type="reset" value="Reset">
+            <input class="submit" type="submit" value=<?php if(isset($_POST['ad_id'])) echo "Save"; else echo "Submit";?>>
+            <input class="reset" type="reset" value="Reset">
         </form>
     </div>
     <br><br>
