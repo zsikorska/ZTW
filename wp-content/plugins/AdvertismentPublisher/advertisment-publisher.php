@@ -78,8 +78,8 @@ function ad_pub_admin_page(){
             <input type="time" id="ad_start_time" name="ad_start_time" value="<?php echo $selected_start_time ?>">
             <label for="ad_end_time">End time:</label>
             <input type="time" id="ad_end_time" name="ad_end_time" value="<?php echo $selected_end_time ?>">
-            <input class="submit" type="submit" value=<?php if(isset($_POST['ad_id'])) echo "Save"; else echo "Submit";?>>
-            <input class="reset" type="reset" value="Reset">
+            <input id="submit-ad" class="submit" type="submit" value=<?php if(isset($_POST['ad_id'])) echo "Save"; else echo "Submit";?>>
+            <input id="reset-ad" class="reset" type="reset" value="Reset">
         </form>
     </div>
     <br><br>
@@ -109,8 +109,8 @@ function ad_pub_admin_page(){
             <td>
                 <form name="ad_edit_delete_form" method="post">
                     <input type="hidden" name="ad_id" value="<?php echo $i ?>">
-                    <button class="edit" name="subject" value="edit">Edit</button>
-                    <button class="delete" name="subject" value="delete">Delete</button>
+                    <button id="edit-ad" class="edit" name="subject" value="edit">Edit</button>
+                    <button id="delete-ad" class="delete" name="subject" value="delete">Delete</button>
                 </form>
             </td>
         </tr>

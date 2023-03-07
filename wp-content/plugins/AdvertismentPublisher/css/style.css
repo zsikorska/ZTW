@@ -19,7 +19,7 @@ td, th {
     text-align: center;
   }
   
-.edit, .submit {
+#edit-ad, #submit-ad {
     background-color: #4CAF50;
     border: none;
     color: white;
@@ -32,7 +32,7 @@ td, th {
     cursor: pointer;
   }
 
-.delete {
+#delete-ad {
     background-color: #f44336;
     border: none;
     color: white;
@@ -45,7 +45,7 @@ td, th {
     cursor: pointer;
   }
 
-  .reset {
+  #reset-ad {
     color: #f44336;
     padding: 5px 10px;
     text-align: center;
