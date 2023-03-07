@@ -1,11 +1,12 @@
 .ad {
-    border: 1px solid #080808;
     padding: 10px;
     margin-bottom: 20px;
+    background-color: #f9f6f6;
+    box-shadow: 10px 10px 5px #e4e2e2;
   }
 
 .ad:hover {
-    border: 2px solid #601c1c;
+    border: 2px solid #0b0b0b;
 }
 
 table {
@@ -46,7 +47,7 @@ td, th {
   }
 
   #reset-ad {
-    color: #f44336;
+    color: #ee3a2d;
     padding: 5px 10px;
     text-align: center;
     text-decoration: none;
