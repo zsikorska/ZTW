@@ -1,0 +1,44 @@
+
+@import '../helpers/variables';
+
+//zagnieżdżenie
+nav {
+  background-color: $themeBlackColor;
+  border-bottom: 2px solid $themeLightColor;
+  position: fixed;
+  height: 60px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  .nav-container {
+    width: 960px;
+    margin: auto;
+  }
+
+  ul {
+    display: flex;
+    float: left;
+    justify-content: space-between;
+    list-style-type: none;
+    text-decoration: none;
+    padding: 0;
+  }
+
+  li {
+    text-align: center;
+    height: 20px;
+    padding: 5px 10px;
+    border-right: 1px solid $themeLightColor;
+  }
+
+  li:last-of-type {
+    border-right: none;
+  }
+
+  a {
+    color: $themeLightColor;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+}

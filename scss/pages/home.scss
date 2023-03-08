@@ -1,0 +1,77 @@
+@import '../layout/navigation';
+@import '../layout/header';
+@import '../layout/body';
+@import '../layout/footer';
+@import '../helpers/variables';
+
+%center-container {
+  display: flex;
+  justify-content: center;
+  text-align: justify;
+  padding: 50px;
+  width: 960px;
+}
+
+//dziedziczenie/inheritance
+.overview {
+  @extend %center-container;
+  flex-direction: column;
+  margin: 50px auto;
+  background-color: $themeGreenColor;
+  -webkit-box-shadow: 0 000px 77px -24px rgba(66, 68, 90, 1);
+  -moz-box-shadow: 0 000px 77px -24px rgba(66, 68, 90, 1);
+  box-shadow: 0 000px 77px -24px rgba(66, 68, 90, 1);
+
+  p, h3 {
+    color: #FFFFFF;
+  }
+}
+
+.meal_div {
+  @extend %center-container;
+  border-top: 1px solid $themeBlackColor;
+  margin: 15px auto;
+  background: $themeLightColor;
+
+  p {
+    margin: 15px;
+  }
+
+  article {
+    margin: 20px;
+    max-width: 50%;
+  }
+
+  h3 {
+    text-align: center;
+  }
+
+  .meal_photo {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+
+    img {
+      width: 400px;
+      height: auto;
+      margin: 20px;
+    }
+  }
+}
+
+.meals_section {
+  display: block;
+  justify-content: center;
+  width: 100%;
+
+  .meal_div:last-child {
+    margin-bottom: 100px;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 40px;
+  }
+}
+
+
