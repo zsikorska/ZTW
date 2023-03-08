@@ -9,8 +9,9 @@
   justify-content: center;
   text-align: justify;
   padding: 50px;
-  width: 960px;
+  width: calc(100% - 100px);
 }
+
 
 //dziedziczenie/inheritance
 .overview {
