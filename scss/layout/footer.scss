@@ -1,17 +1,15 @@
 
-@import '../helpers/variables';
+@import '../utils/variables';
 
 footer {
   background-color: $themeBlackColor;
   margin-bottom: 0;
   margin-top: 50px;
-  padding: 10px;
+  padding: 30px;
 
   p, a {
-    position: relative;
-    left: 20px;
     font-variant: small-caps;
-    color: #FAFFFF;
+    color: $themeLightColor;
     margin: 5px 10px;
   }
 }

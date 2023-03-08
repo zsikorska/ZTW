@@ -2,53 +2,52 @@
 @import '../layout/header';
 @import '../layout/body';
 @import '../layout/footer';
-@import '../helpers/variables';
-@import '../helpers/mixins';
+@import '../utils/variables';
+@import '../utils/mixins';
+@import '../utils/extends';
 
 $center-container-padding: 50px;
-%center-container {
-  display: flex;
-  justify-content: center;
+%pageContentContainer {
+  @extend %flexCenteredContainer;
   text-align: justify;
   padding: $center-container-padding;
   width: calc(100% - 2 * $center-container-padding);
 }
 
 
-//dziedziczenie/inheritance
+//inheritance, mixins
 .overview {
-  @extend %center-container;
+  @extend %pageContentContainer;
   @include colored-container($themeGreenColor, $themeLightColor);
   @include shadow(-24px);
   flex-direction: column;
   margin: 50px auto;
+
   h3 {
     color: $themeLightColor;
   }
 
 }
 
-.meal_div {
-  @extend %center-container;
+.meal-container {
+  @extend %pageContentContainer;
   border-top: 1px solid $themeBlackColor;
   margin: 15px auto;
-
-  p {
-    margin: 15px;
-  }
-
-  article {
-    margin: 20px;
-    max-width: 50%;
-  }
 
   h3 {
     text-align: center;
   }
 
-  .meal_photo {
-    justify-content: center;
-    display: flex;
+  article {
+    margin: 20px;
+    max-width: 50%;
+    p {
+      margin: 15px;
+    }
+  }
+
+  .meal-photo {
+    @extend %flexCenteredContainer;
     flex-direction: column;
 
     img {
@@ -59,30 +58,29 @@ $center-container-padding: 50px;
   }
 }
 
-.meals_section {
+.meals-section {
   display: block;
   justify-content: center;
   width: 100%;
 
-  .meal_div:last-child {
-    margin-bottom: 100px;
+  .meal-container:last-child {
+    margin-bottom: 50px;
   }
 
   h2 {
     text-align: center;
     font-size: 40px;
   }
-
-  .tip-container {
-    @extend %center-container;
-    @include colored-container($themeBrownColor, $themeLightColor);
-    @include shadow(-10px);
-    flex-direction: column;
-    padding: 20px 50px;
-    h3 {
-      color: $themeLightColor;
-    }
-  }
 }
 
+.tip-container {
+  @extend %pageContentContainer;
+  @include colored-container($themeBrownColor, $themeLightColor);
+  @include shadow(-10px);
+  flex-direction: column;
+  padding: 20px 50px;
 
+  h3 {
+    color: $themeLightColor;
+  }
+}

@@ -1,10 +1,12 @@
+@import "../utils/variables";
+
 $page-content-padding: 20px;
 body {
   margin: 0;
   font-family: sans-serif;
 
   .page-content {
-    width: 960px;
+    width: $page-content-width;
     max-width: calc(100% - 2 * $page-content-padding);
     padding: 0 $page-content-padding;
     margin: 0 auto;
