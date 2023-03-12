@@ -62,18 +62,6 @@ $center-container-padding: 50px;
   }
 }
 
-.tip-container {
-  @extend %pageContentContainer;
-  @include colored-container($themeBrownColor, $themeLightColor);
-  @include shadow(-10px);
-  flex-direction: column;
-  padding: 20px 50px;
-
-  h3 {
-    color: $themeLightColor;
-  }
-}
-
 .card-container {
   display: flex;
   flex-wrap: wrap;
@@ -115,7 +103,7 @@ $center-container-padding: 50px;
 }
 
 .flip-card-back {
-  background-color: #2980b9;
+  background-color: $themeGreenColor;
   color: white;
   transform: rotateY(180deg);
   display: flex;
