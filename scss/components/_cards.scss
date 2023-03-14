@@ -8,7 +8,7 @@
 .flip-card {
   background-color: transparent;
   // function
-  width: calculateCardWidth(3, 10px);
+  width: calculate-card-width(3, 10px);
   margin-bottom: 20px;
   box-sizing: border-box;
   padding: 0 15px;
@@ -39,6 +39,9 @@
     @extend %flipCardBack;
     background-color: $themeGreenColor;
   }
+
+  // list of tuples
+  $flipCardColorConfig: 'first' $themeGreenColor, 'second' change-color($themeGreenColor), 'third' change-color(change-color($themeGreenColor));
 
   // use list, nth() is accessor
   @each $tuple in $flipCardColorConfig {
