@@ -1,21 +1,8 @@
 .form-container {
-  @extend %pageContentContainer;
+  @extend %themeContainer;
   padding: 10px;
-  border-top: 1px solid $themeBlackColor;
-  margin: 15px auto;
   display: flex;
   flex-wrap: wrap;
-
-  h3 {
-    text-align: center;
-  }
-
-  article {
-    margin: 20px;
-    p {
-      margin: 15px;
-    }
-  }
 }
 
 form {

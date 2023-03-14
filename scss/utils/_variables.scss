@@ -6,3 +6,6 @@ $themeBrownColor: #6a3931;
 $page-content-width: 960px;
 $page-content-padding: 20px;
 $center-container-padding: 50px;
+
+// list of tuples
+$flipCardColorConfig: 'first' $themeGreenColor, 'second' make-greener($themeGreenColor), 'third' make-greener(make-greener($themeGreenColor));

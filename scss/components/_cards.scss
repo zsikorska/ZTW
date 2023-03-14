@@ -7,7 +7,8 @@
 // flip cards
 .flip-card {
   background-color: transparent;
-  width: calc(33.33% - 10px);
+  // function
+  width: calculateCardWidth(3, 10px);
   margin-bottom: 20px;
   box-sizing: border-box;
   padding: 0 15px;
@@ -22,7 +23,7 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   }
 
-  .flip-card-front, .flip-card-back {
+  .flip-card-front {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -35,12 +36,17 @@
   }
 
   .flip-card-back {
+    @extend %flipCardBack;
     background-color: $themeGreenColor;
-    color: white;
-    transform: rotateY(180deg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  }
+
+  // use list, nth() is accessor
+  @each $tuple in $flipCardColorConfig {
+    // string interpolation
+    .flip-card-back-#{nth($tuple, 1)} {
+      @extend %flipCardBack;
+      background-color: nth($tuple, 2);
+    }
   }
 
   .flip-card-img {
