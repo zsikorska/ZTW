@@ -2,3 +2,39 @@
   display: flex;
   justify-content: center;
 }
+
+%pageContentContainer {
+  @extend %flexCenteredContainer;
+  text-align: justify;
+  padding: $center-container-padding;
+  width: calc(100% - 2 * $center-container-padding);
+}
+
+%themeSection {
+  display: block;
+  justify-content: center;
+  width: 100%;
+
+  h2 {
+    text-align: center;
+    font-size: 40px;
+  }
+}
+
+%themeContainer {
+  @extend %pageContentContainer;
+  border-top: 1px solid $themeBlackColor;
+  margin: 15px auto;
+
+  h3 {
+    text-align: center;
+  }
+
+  article {
+    margin: 20px;
+
+    p {
+      margin: 15px;
+    }
+  }
+}

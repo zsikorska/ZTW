@@ -1,16 +1,3 @@
-@import '../utils/variables';
-@import '../utils/mixins';
-@import '../utils/extends';
-
-$center-container-padding: 50px;
-%pageContentContainer {
-  @extend %flexCenteredContainer;
-  text-align: justify;
-  padding: $center-container-padding;
-  width: calc(100% - 2 * $center-container-padding);
-}
-
-
 //inheritance, mixins
 .overview {
   @extend %pageContentContainer;
@@ -22,24 +9,13 @@ $center-container-padding: 50px;
   h3 {
     color: $themeLightColor;
   }
-
 }
 
 .meal-container {
-  @extend %pageContentContainer;
-  border-top: 1px solid $themeBlackColor;
-  margin: 15px auto;
-
-  h3 {
-    text-align: center;
-  }
+  @extend %themeContainer;
 
   article {
-    margin: 20px;
     max-width: 50%;
-    p {
-      margin: 15px;
-    }
   }
 
   .meal-photo {
@@ -55,17 +31,10 @@ $center-container-padding: 50px;
 }
 
 .meals-section {
-  display: block;
-  justify-content: center;
-  width: 100%;
+  @extend %themeSection;
 
   .meal-container:last-child {
     margin-bottom: 50px;
-  }
-
-  h2 {
-    text-align: center;
-    font-size: 40px;
   }
 }
 

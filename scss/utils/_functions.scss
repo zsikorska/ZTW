@@ -1,0 +1,5 @@
+
+@function calculateCardWidth($cardWidth, $cardMargin) {
+  $cardWidth: $cardWidth - $cardMargin;
+  @return $cardWidth;
+}

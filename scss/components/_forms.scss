@@ -1,7 +1,3 @@
-@import '../utils/variables';
-@import '../utils/mixins';
-@import '../utils/extends';
-
 .form-container {
   @extend %pageContentContainer;
   padding: 10px;

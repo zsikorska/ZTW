@@ -1,59 +1,12 @@
-@import '../utils/variables';
-@import '../utils/mixins';
-@import '../utils/extends';
-
-$center-container-padding: 50px;
-%pageContentContainer {
-  @extend %flexCenteredContainer;
-  text-align: justify;
-  padding: $center-container-padding;
-  width: calc(100% - 2 * $center-container-padding);
-}
-
-
-//inheritance, mixins
-.overview {
-  @extend %pageContentContainer;
-  @include colored-container($themeGreenColor, $themeLightColor);
-  @include shadow(-24px);
-  flex-direction: column;
-  margin: 50px auto;
-
-  h3 {
-    color: $themeLightColor;
-  }
-
-}
-
 .dish-container {
-  @extend %pageContentContainer;
+  @extend %themeContainer;
   padding: 10px;
-  border-top: 1px solid $themeBlackColor;
-  margin: 15px auto;
-
-  h3 {
-    text-align: center;
-  }
-
-  article {
-    margin: 20px;
-    p {
-      margin: 15px;
-    }
-  }
 }
 
 .dishes-section {
-  display: block;
-  justify-content: center;
-  width: 100%;
+  @extend %themeSection;
 
-  .meal-container:last-child {
+  .dish-container:last-child {
     margin-bottom: 50px;
-  }
-
-  h2 {
-    text-align: center;
-    font-size: 40px;
   }
 }
