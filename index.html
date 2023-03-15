@@ -381,7 +381,9 @@
                     </form>
 
                     <div class="text-center text-md-left">
-                        <a class="btn btn-primary" data-toggle="modal" data-target=".animate" data-ui-class="a-zoom">Send</a>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Send
+                        </button>
                     </div>
                     <div class="status"></div>
                 </div>
@@ -407,21 +409,21 @@
                 <!--Grid column-->
 
             </div>
-            <div class="modal animate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="true">
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Confirm sending</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Confirm contact</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
+                                <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body text-center p-lg">
-                            <p>Are you sure to send the message?</p>
+                        <div class="modal-body">
+                            By submiting this form you agree to receive answer by email.
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-primary">Send</button>
                         </div>
                     </div>
                 </div>
