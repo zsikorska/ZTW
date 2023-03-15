@@ -11,3 +11,7 @@ header,
     -o-background-size: cover;
     background-size: cover;
 }
+
+
+.modal.animate.confirm .a-zoom{-webkit-animation:zoomOut .5s;animation:zoomOut .5s}
+.modal.animate.show.confirm .a-zoom{-webkit-animation:zoomIn .5s;animation:zoomIn .5s}
