@@ -14,6 +14,7 @@ header,
 
 .carousel-inner {
     padding: 1.3em;
+    display: flex;
 }
 .carousel-item .card {
     margin: 30px;
@@ -21,28 +22,13 @@ header,
     border: none;
 
 }
-.carousel-control-prev,
-.carousel-control-next {
+.carousel-control-prev, .carousel-control-next {
     background-color: #e1e1e1;
     width: 5vh;
     height: 5vh;
     border-radius: 50%;
     top: 50%;
     transform: translateY(-50%);
-}
-@media (min-width: 768px) {
-    .carousel-item {
-        margin-right: 0;
-        flex: 0 0 33.333333%;
-        display: block;
-    }
-    .carousel-inner {
-        display: flex;
-    }
-
-    .carousel-item .card img {
-        height: 13em;
-    }
 }
 
 .carousel-item .card img {
@@ -51,10 +37,24 @@ header,
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 13em;
 }
+
+.carousel-item .card-body {
+    height: 13em;
+}
+
 @media (max-width: 767px) {
     .carousel-item .card img {
         height: 17em;
+    }
+}
+
+@media (min-width: 768px) {
+    .carousel-item {
+        margin-right: 0;
+        flex: 0 0 33.333333%;
+        display: block;
     }
 }
 
