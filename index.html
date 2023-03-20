@@ -90,7 +90,7 @@
                             <!-- Description -->
                             <h4 class="white-text my-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti consequuntu
                                 r.</h4>
-                            <button type="button" class="btn btn-outline-white">Dowiedz się więcej<i class="fas fa-book ml-2"></i></button>
+                            <button type="button" class="btn btn-outline-white" onClick="document.getElementById('faq').scrollIntoView();">Dowiedz się więcej<i class="fas fa-book ml-2"></i></button>
                         </div>
                     </div>
                 </div>
@@ -157,6 +157,7 @@
                 </div>
                 <!--Grid column-->
             </div>
+            <div class="my-lg-5"></div>
             <!--Grid row-->
             <div class="row wow fadeInRight fast">
                 <!--Grid column-->
@@ -247,39 +248,39 @@
                 <h2 class="h1-responsive font-weight-bold text-center my-4">City break</h2>
                 <div class="my-lg-5"></div>
                 <!--Grid row-->
-                <div class="row wow slideInRight fast">
+                <div class="row color-container wow slideInRight fast">
                     <!--Grid column-->
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 p-0">
                         <img src="img/rzym.jpg" class="img-fluid">
                     </div>
                     <!--Grid column-->
-                    <div class="col-lg-8">
+                    <div class="col-lg-8 p-3">
                         <h2>Rzym</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed imperdiet tortor vitae justo tristique, sit amet rhoncus lectus viverra. Fusce non diam non metus convallis fringilla in vel nulla. Nulla facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent commodo ipsum in ligula molestie, vitae mattis urna imperdiet. Suspendisse vel odio libero.</p>
                     </div>
                 </div>
                 <div class="my-lg-5"></div>
                 <!--Grid row-->
-                <div class="row wow slideInLeft fast">
+                <div class="row color-container wow slideInLeft fast">
                     <!--Grid column-->
-                    <div class="col-lg-8">
+                    <div class="col-lg-8 p-3">
                         <h2>Lisbon</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed imperdiet tortor vitae justo tristique, sit amet rhoncus lectus viverra. Fusce non diam non metus convallis fringilla in vel nulla. Nulla facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent commodo ipsum in ligula molestie, vitae mattis urna imperdiet. Suspendisse vel odio libero.</p>
                     </div>
                     <!--Grid column-->
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 p-0">
                         <img src="img/lisbon.jpg" class="img-fluid">
                     </div>
                 </div>
                 <div class="my-lg-5"></div>
                 <!--Grid row-->
-                <div class="row wow slideInRight fast">
+                <div class="row color-container wow slideInRight fast">
                     <!--Grid column-->
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 p-0">
                         <img src="img/aveiro.jpg" class="img-fluid">
                     </div>
                     <!--Grid column-->
-                    <div class="col-lg-8">
+                    <div class="col-lg-8 p-3">
                         <h2>Aveiro</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed imperdiet tortor vitae justo tristique, sit amet rhoncus lectus viverra. Fusce non diam non metus convallis fringilla in vel nulla. Nulla facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent commodo ipsum in ligula molestie, vitae mattis urna imperdiet. Suspendisse vel odio libero.</p>
                     </div>
@@ -294,7 +295,7 @@
             <h2 class="h1-responsive font-weight-bold text-center my-4">FAQ</h2>
             <div id="accordion">
                 <div class="card">
-                    <div class="card-header" id="headingOne">
+                    <div class="card-header" id="headingOne" style="background-color: #96dafa">
                         <h5 class="mb-0">
                             <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                 What are the best destinations for first time international traveller?
@@ -309,7 +310,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-header" id="headingTwo">
+                    <div class="card-header" id="headingTwo" style="background-color: #e0f5ff">
                         <h5 class="mb-0">
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                 Solo Travel Vs Group Travel
@@ -323,7 +324,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-header" id="headingThree">
+                    <div class="card-header" id="headingThree" style="background-color: #96dafa">
                         <h5 class="mb-0">
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                 How to travel for cheap?
@@ -337,7 +338,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-header" id="headingFour">
+                    <div class="card-header" id="headingFour" style="background-color: #e0f5ff">
                         <h5 class="mb-0">
                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                 Where do I find last minutes deals?
@@ -500,7 +501,7 @@
         <!--Section: Carousel-->
         <hr class="my-5">
         <!--Section: Chart-->
-        <section id="chart">
+        <section id="chart" class="wow slideInRight fast">
             <!--Section heading-->
             <h2 class="h1-responsive font-weight-bold text-center my-4">Most popular travel destinations</h2>
             <canvas id="horizontalBar"></canvas>
@@ -508,7 +509,7 @@
         <!--Section: Chart-->
         <hr class="my-5">
         <!--Section: Contact-->
-        <section id="contact">
+        <section id="contact" class="color-container p-4 wow slideInLeft fast">
             <!--Section heading-->
             <h2 class="h1-responsive font-weight-bold text-center my-4">Contact us</h2>
             <!--Section description-->
@@ -519,12 +520,12 @@
                 <div class="col-md-9 mb-md-0 mb-5">
                     <form id="contact-form" name="contact-form" action="mail.php" method="POST">
                         <!--Grid row-->
-                        <div class="row">
+                        <div class="form-row">
 
                             <!--Grid column-->
                             <div class="col-md-6">
                                 <div class="md-form mb-0">
-                                    <input type="text" id="name" name="name" class="form-control">
+                                    <input type="text" id="name" name="name" class="form-control" required>
                                     <label for="name" class="">Your name</label>
                                 </div>
                             </div>
@@ -533,7 +534,7 @@
                             <!--Grid column-->
                             <div class="col-md-6">
                                 <div class="md-form mb-0">
-                                    <input type="text" id="email" name="email" class="form-control">
+                                    <input type="email" id="email" name="email" class="form-control" required>
                                     <label for="email" class="">Your email</label>
                                 </div>
                             </div>
@@ -546,7 +547,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="md-form mb-0">
-                                    <input type="text" id="subject" name="subject" class="form-control">
+                                    <input type="text" id="subject" name="subject" class="form-control" required>
                                     <label for="subject" class="">Subject</label>
                                 </div>
                             </div>
@@ -560,7 +561,7 @@
                             <div class="col-md-12">
 
                                 <div class="md-form">
-                                    <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
+                                    <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea" required></textarea>
                                     <label for="message">Your message</label>
                                 </div>
 
@@ -568,14 +569,32 @@
                         </div>
                         <!--Grid row-->
 
-                    </form>
-
                     <div class="text-center text-md-left">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        <button type="submit" class="btn btn-primary" id="submit-button">
                             Send
                         </button>
                     </div>
                     <div class="status"></div>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Confirm contact</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        By submiting this form you agree to receive answer by email.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success" data-dismiss="modal" onclick="form.reset()">Send</button>
+                                        <button type="submit" class="btn btn-danger" data-dismiss="modal" onclick="form.reset()">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <!--Grid column-->
 
@@ -598,25 +617,6 @@
                 </div>
                 <!--Grid column-->
 
-            </div>
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Confirm contact</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            By submiting this form you agree to receive answer by email.
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Send</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
         <!--Section: Contact-->
@@ -732,6 +732,18 @@
 
     $( document ).ready(function() {
         new WOW().init();
+    });
+
+
+
+    const form = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-button');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        if (form.checkValidity() === false) {
+            return;
+        }
+        $('#exampleModal').modal('show');
     });
 </script>
 

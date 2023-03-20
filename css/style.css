@@ -23,7 +23,7 @@ header,
 
 }
 .carousel-control-prev, .carousel-control-next {
-    background-color: #e1e1e1;
+    background-color: #96dafa;
     width: 5vh;
     height: 5vh;
     border-radius: 50%;
@@ -38,6 +38,10 @@ header,
     justify-content: center;
     align-items: center;
     height: 13em;
+}
+
+.carousel-item .card a {
+    color: #96dafa;
 }
 
 .carousel-item .card-body {
@@ -56,5 +60,12 @@ header,
         flex: 0 0 33.333333%;
         display: block;
     }
+}
+
+.color-container {
+    background-color: #e0f5ff;
+    -webkit-box-shadow: 0 000px 50px -15px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 0 000px 50px -15px rgba(66, 68, 90, 1);
+    box-shadow: 0 000px 50px -15px rgba(66, 68, 90, 1);
 }
 
