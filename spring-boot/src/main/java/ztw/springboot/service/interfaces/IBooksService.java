@@ -6,5 +6,6 @@ import java.util.Collection;
 
 public interface IBooksService {
     Collection<Book> getBooks();
-    Book getBook(int id);
+
+    Book getBook(long id);
 }
