@@ -25,10 +25,12 @@ public class Book {
     private List<Author> authors;
     int pages;
 
-    public Book(int id, String title, List<Author> authors, int pages) {
-        this.id = id;
+    public Book(String title, int pages) {
         this.title = title;
-        this.authors = authors;
         this.pages = pages;
+    }
+
+    public void addAuthor(Author author) {
+        authors.add(author);
     }
 }
