@@ -1,6 +1,6 @@
 package ztw.springboot.service.interfaces;
 
-import ztw.springboot.api.dto.BookDTO;
+import ztw.springboot.api.dto.BookFormDTO;
 import ztw.springboot.model.Book;
 
 import java.util.Collection;
@@ -10,9 +10,9 @@ public interface IBooksService {
 
     Book getBook(long id);
 
-    void addBook(BookDTO bookDTO);
+    Book addBook(BookFormDTO bookDTO);
 
-    void updateBook(long bookId, BookDTO bookDTO);
+    void updateBook(long bookId, BookFormDTO bookDTO);
 
     void deleteBook(long id);
 }

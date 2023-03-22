@@ -1,10 +1,12 @@
 package ztw.springboot.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,9 +14,13 @@ import java.util.List;
 @Getter
 @Setter
 public class Book {
+    @Schema(description = "Number of pages", example = "120")
+    int pages;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Schema(description = "Book id", example = "1")
     private long id;
+    @Schema(description = "Title of the book", example = "Harry Potter and the Philosophers Stone")
     private String title;
     @ManyToMany
     @JoinTable(
@@ -22,12 +28,13 @@ public class Book {
             joinColumns = {@JoinColumn(name = "book_id")},
             inverseJoinColumns = {@JoinColumn(name = "author_id")}
     )
+    @Schema(description = "List of authors")
     private List<Author> authors;
-    int pages;
 
     public Book(String title, int pages) {
         this.title = title;
         this.pages = pages;
+        this.authors = new ArrayList<>();
     }
 
     public void addAuthor(Author author) {

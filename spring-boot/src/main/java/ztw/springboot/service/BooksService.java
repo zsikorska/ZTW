@@ -2,11 +2,12 @@ package ztw.springboot.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import ztw.springboot.api.dto.BookDTO;
+import ztw.springboot.api.dto.BookFormDTO;
 import ztw.springboot.model.Book;
 import ztw.springboot.repository.BookRepository;
 import ztw.springboot.service.interfaces.IBooksService;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.NoSuchElementException;
 
@@ -28,10 +29,10 @@ public class BooksService implements IBooksService {
     }
 
     @Override
-    public void addBook(BookDTO bookDTO) {
+    public Book addBook(BookFormDTO bookDTO) {
         Book newBook = new Book(bookDTO.getTitle(), bookDTO.getPages());
         bookDTO.getAuthorIds().forEach(id -> newBook.addAuthor(authorService.getAuthorById(id)));
-        bookRepository.save(newBook);
+        return bookRepository.save(newBook);
     }
 
     @Override
@@ -42,10 +43,11 @@ public class BooksService implements IBooksService {
     }
 
     @Override
-    public void updateBook(long bookId, BookDTO bookDTO) {
+    public void updateBook(long bookId, BookFormDTO bookDTO) {
         Book book = getBook(bookId);
         mapper.map(bookDTO, book);
-        book.setAuthors(bookDTO.getAuthorIds().stream().map(authorService::getAuthorById).toList());
+        var authors = bookDTO.getAuthorIds().stream().map(authorService::getAuthorById).toList();
+        book.setAuthors(new ArrayList<>(authors));
         bookRepository.save(book);
     }
 

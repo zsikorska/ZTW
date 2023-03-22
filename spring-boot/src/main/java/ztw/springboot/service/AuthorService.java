@@ -2,15 +2,16 @@ package ztw.springboot.service;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import ztw.springboot.api.dto.AuthorDTO;
+import ztw.springboot.api.dto.AuthorFormDTO;
 import ztw.springboot.model.Author;
 import ztw.springboot.repository.AuthorRepository;
+import ztw.springboot.service.interfaces.IAuthorService;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-public class AuthorService {
+public class AuthorService implements IAuthorService {
     private final AuthorRepository authorRepository;
     private final ModelMapper mapper;
 
@@ -29,12 +30,12 @@ public class AuthorService {
         );
     }
 
-    public void addAuthor(AuthorDTO authorDTO) {
+    public Author addAuthor(AuthorFormDTO authorDTO) {
         Author newAuthor = mapper.map(authorDTO, Author.class);
-        authorRepository.save(newAuthor);
+        return authorRepository.save(newAuthor);
     }
 
-    public void updateAuthor(long authorId, AuthorDTO authorDTO) {
+    public void updateAuthor(long authorId, AuthorFormDTO authorDTO) {
         Author author = getAuthorById(authorId);
         mapper.map(authorDTO, author);
         authorRepository.save(author);

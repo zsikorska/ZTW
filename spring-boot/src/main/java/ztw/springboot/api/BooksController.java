@@ -1,9 +1,11 @@
 package ztw.springboot.api;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ztw.springboot.api.dto.BookDTO;
+import ztw.springboot.api.dto.BookFormDTO;
+import ztw.springboot.model.Book;
 import ztw.springboot.service.interfaces.IBooksService;
 
 @RestController
@@ -16,18 +18,50 @@ public class BooksController {
     }
 
     @GetMapping()
+    @Operation(
+            summary = "Get books",
+            description = "Get all books in the database"
+    )
     public ResponseEntity<Object> getBooks() {
         return new ResponseEntity<>(booksService.getBooks(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Object> getBook(@PathVariable("id") int id) {
-        return new ResponseEntity<>(booksService.getBook(id), HttpStatus.OK);
+    @Operation(
+            summary = "Get book",
+            description = "Get book by id"
+    )
+    public ResponseEntity<Object> getBook(@PathVariable("id") long bookId) {
+        return new ResponseEntity<>(booksService.getBook(bookId), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Object> addBook(@RequestBody BookDTO bookDTO) {
-        booksService.addBook(bookDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(
+            summary = "Add new book",
+            description = "Add new book to database with assigned authors"
+    )
+    public ResponseEntity<Book> addBook(@RequestBody BookFormDTO bookDTO) {
+        return new ResponseEntity<>(booksService.addBook(bookDTO), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    @Operation(
+            summary = "Update book",
+            description = "Update book data and authors by id"
+    )
+    public ResponseEntity<Void> updateBook(@PathVariable("id") long bookId, @RequestBody BookFormDTO bookDTO) {
+        booksService.updateBook(bookId, bookDTO);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(
+            summary = "Delete book",
+            description = "Delete book from database"
+    )
+    public ResponseEntity<Void> deleteBook(@PathVariable("id") long bookId) {
+        booksService.deleteBook(bookId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
