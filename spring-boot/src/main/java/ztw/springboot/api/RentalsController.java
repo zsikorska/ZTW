@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ztw.springboot.api.dto.RentalFormDTO;
+import ztw.springboot.exception.RentedBookException;
 import ztw.springboot.service.interfaces.IRentalService;
 
 
@@ -58,7 +59,7 @@ public class RentalsController {
             summary = "Add new rental",
             description = "Add new rental to database"
     )
-    public ResponseEntity<?> addRental(@RequestBody RentalFormDTO rentalDTO) {
+    public ResponseEntity<?> addRental(@RequestBody RentalFormDTO rentalDTO) throws RentedBookException {
         return new ResponseEntity<>(rentalService.addRental(rentalDTO), HttpStatus.CREATED);
     }
 
@@ -67,7 +68,7 @@ public class RentalsController {
             summary = "Update rental",
             description = "Update rental data by id"
     )
-    public ResponseEntity<?> updateRental(@PathVariable("id") long rentalId, @RequestBody RentalFormDTO rentalDTO) {
+    public ResponseEntity<?> updateRental(@PathVariable("id") long rentalId, @RequestBody RentalFormDTO rentalDTO) throws RentedBookException {
         rentalService.updateRental(rentalId, rentalDTO);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

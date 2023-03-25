@@ -3,6 +3,7 @@ package ztw.springboot.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ztw.springboot.exception.RentedBookException;
 import ztw.springboot.model.Book;
 import ztw.springboot.model.Reader;
 import ztw.springboot.repository.RentalRepository;
@@ -52,9 +53,9 @@ public class RentalService implements IRentalService {
 
 
     @Override
-    public Rental addRental(RentalFormDTO rentalDTO) {
+    public Rental addRental(RentalFormDTO rentalDTO) throws RentedBookException {
         if (rentalRepository.existsByBookIdAndReturned(rentalDTO.getBookId(), false))
-            throw new IllegalArgumentException("Book with id: '" + rentalDTO.getBookId() + "' is already rented");
+            throw new RentedBookException(rentalDTO.getBookId());
 
         Book book = bookService.getBook(rentalDTO.getBookId());
         Reader reader = readerService.getReaderById(rentalDTO.getReaderId());
@@ -65,11 +66,11 @@ public class RentalService implements IRentalService {
     }
 
     @Override
-    public void updateRental(long rentalId, RentalFormDTO rentalDTO) {
+    public void updateRental(long rentalId, RentalFormDTO rentalDTO) throws RentedBookException {
         Rental rental = getRentalById(rentalId);
         if (rentalRepository.existsByBookIdAndReturned(rentalDTO.getBookId(), false) &&
                 rentalDTO.getBookId() != rental.getBook().getId())
-            throw new IllegalArgumentException("Book with id: '" + rentalDTO.getBookId() + "' is already rented");
+            throw new RentedBookException(rentalDTO.getBookId());
 
         rental.setBook(bookService.getBook(rentalDTO.getBookId()));
         rental.setReader(readerService.getReaderById(rentalDTO.getReaderId()));
