@@ -46,6 +46,12 @@ public class RentalService implements IRentalService {
     }
 
     @Override
+    public List<Rental> getRentalsByReaderId(long readerId) {
+        return rentalRepository.findByReaderId(readerId);
+    }
+
+
+    @Override
     public Rental addRental(RentalFormDTO rentalDTO) {
         if (rentalRepository.existsByBookIdAndReturned(rentalDTO.getBookId(), false))
             throw new IllegalArgumentException("Book with id: '" + rentalDTO.getBookId() + "' is already rented");

@@ -43,6 +43,11 @@ public class BooksService implements IBooksService {
     }
 
     @Override
+    public Collection<Book> getBooksByAuthorId(long authorId) {
+        return bookRepository.findAllByAuthors_Id(authorId);
+    }
+
+    @Override
     public void updateBook(long bookId, BookFormDTO bookDTO) {
         Book book = getBook(bookId);
         mapper.map(bookDTO, book);

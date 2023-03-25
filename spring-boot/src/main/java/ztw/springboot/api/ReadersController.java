@@ -37,6 +37,7 @@ public class ReadersController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     @Operation(
             summary = "Add new reader",
             description = "Add new reader to database"

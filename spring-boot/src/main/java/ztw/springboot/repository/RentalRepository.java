@@ -11,4 +11,6 @@ public interface RentalRepository extends JpaRepository<Rental, Long> {
     List<Rental> findByReturned(boolean returned);
 
     boolean existsByBookIdAndReturned(long bookId, boolean returned);
+
+    List<Rental> findByReaderId(long readerId);
 }

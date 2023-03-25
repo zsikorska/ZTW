@@ -13,6 +13,8 @@ public interface IRentalService {
 
     Rental getRentalById(long id);
 
+    List<Rental> getRentalsByReaderId(long readerId);
+
     Rental addRental(RentalFormDTO rentalDTO);
 
     void updateRental(long rentalId, RentalFormDTO rentalDTO);

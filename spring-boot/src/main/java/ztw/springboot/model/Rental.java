@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -27,16 +28,16 @@ public class Rental {
     @JoinColumn(name = "reader_id")
     private Reader reader;
 
-    @Schema(description = "Date of rental", example = "01-03-2023")
-    private String dateOfRental;
+    @Schema(description = "Date of rental", example = "2023-03-01")
+    private LocalDate dateOfRental;
 
-    @Schema(description = "Date of return", example = "30-03-2023")
-    private String dateOfReturn;
+    @Schema(description = "Date of return", example = "2023-03-30")
+    private LocalDate dateOfReturn;
 
     @Schema(description = "If book was returned", example = "true")
     private boolean returned;
 
-    public Rental(Book book, Reader reader, String dateOfRental, String dateOfReturn, boolean returned) {
+    public Rental(Book book, Reader reader, LocalDate dateOfRental, LocalDate dateOfReturn, boolean returned) {
         this.book = book;
         this.reader = reader;
         this.dateOfRental = dateOfRental;

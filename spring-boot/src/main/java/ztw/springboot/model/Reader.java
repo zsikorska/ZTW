@@ -29,4 +29,5 @@ public class Reader {
 
     @Schema(description = "Email", example = "john.smith@gmail.com")
     private String email;
+
 }

@@ -10,6 +10,8 @@ public interface IBooksService {
 
     Book getBook(long id);
 
+    Collection<Book> getBooksByAuthorId(long authorId);
+
     Book addBook(BookFormDTO bookDTO);
 
     void updateBook(long bookId, BookFormDTO bookDTO);

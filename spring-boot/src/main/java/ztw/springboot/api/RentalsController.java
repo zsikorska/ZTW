@@ -43,7 +43,17 @@ public class RentalsController {
         return ResponseEntity.ok(rentalService.getRentalById(rentalId));
     }
 
+    @GetMapping("/reader/{id}")
+    @Operation(
+            summary = "Get rentals by reader id",
+            description = "Get all rentals by reader id"
+    )
+    public ResponseEntity<?> getRentalsByReaderId(@PathVariable("id") long readerId) {
+        return ResponseEntity.ok(rentalService.getRentalsByReaderId(readerId));
+    }
+
     @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
     @Operation(
             summary = "Add new rental",
             description = "Add new rental to database"
