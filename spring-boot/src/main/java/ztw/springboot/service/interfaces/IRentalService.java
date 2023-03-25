@@ -18,8 +18,8 @@ public interface IRentalService {
 
     Rental addRental(RentalFormDTO rentalDTO) throws RentedBookException;
 
-    void updateRental(long rentalId, RentalFormDTO rentalDTO) throws RentedBookException;
+    Rental updateRental(long rentalId, RentalFormDTO rentalDTO) throws RentedBookException;
 
-    void deleteRental(long id);
+    String deleteRental(long id);
 
 }

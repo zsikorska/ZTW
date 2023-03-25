@@ -37,14 +37,15 @@ public class ReaderService implements IReaderService {
     }
 
     @Override
-    public void updateReader(long readerId, ReaderFormDTO readerDTO) {
+    public Reader updateReader(long readerId, ReaderFormDTO readerDTO) {
         Reader reader = getReaderById(readerId);
         mapper.map(readerDTO, reader);
-        readerRepository.save(reader);
+        return readerRepository.save(reader);
     }
 
     @Override
-    public void deleteReader(long readerId) {
+    public String deleteReader(long readerId) {
         readerRepository.deleteById(readerId);
+        return "Reader with id: '" + readerId + "' deleted";
     }
 }

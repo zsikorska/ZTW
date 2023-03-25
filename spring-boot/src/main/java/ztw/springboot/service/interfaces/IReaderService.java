@@ -13,7 +13,7 @@ public interface IReaderService {
 
     Reader addReader(ReaderFormDTO readerDTO);
 
-    void updateReader(long readerId, ReaderFormDTO readerDTO);
+    Reader updateReader(long readerId, ReaderFormDTO readerDTO);
 
-    void deleteReader(long id);
+    String deleteReader(long id);
 }

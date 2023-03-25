@@ -69,8 +69,7 @@ public class RentalsController {
             description = "Update rental data by id"
     )
     public ResponseEntity<?> updateRental(@PathVariable("id") long rentalId, @RequestBody RentalFormDTO rentalDTO) throws RentedBookException {
-        rentalService.updateRental(rentalId, rentalDTO);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(rentalService.updateRental(rentalId, rentalDTO), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
@@ -79,8 +78,7 @@ public class RentalsController {
             description = "Delete rental by id"
     )
     public ResponseEntity<?> deleteRental(@PathVariable("id") long rentalId) {
-        rentalService.deleteRental(rentalId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(rentalService.deleteRental(rentalId), HttpStatus.OK);
     }
 
 

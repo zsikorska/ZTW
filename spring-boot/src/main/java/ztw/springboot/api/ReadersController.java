@@ -51,9 +51,8 @@ public class ReadersController {
             summary = "Update reader",
             description = "Update reader data by id"
     )
-    public ResponseEntity<Void> updateReader(@PathVariable("id") long readerId, @RequestBody ReaderFormDTO readerDTO) {
-        readerService.updateReader(readerId, readerDTO);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<Reader> updateReader(@PathVariable("id") long readerId, @RequestBody ReaderFormDTO readerDTO) {
+        return new ResponseEntity<>(readerService.updateReader(readerId, readerDTO), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
@@ -61,8 +60,7 @@ public class ReadersController {
             summary = "Delete reader",
             description = "Delete reader from database"
     )
-    public ResponseEntity<Void> deleteReader(@PathVariable("id") long readerId) {
-        readerService.deleteReader(readerId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<String> deleteReader(@PathVariable("id") long readerId) {
+        return new ResponseEntity<>(readerService.deleteReader(readerId), HttpStatus.OK);
     }
 }

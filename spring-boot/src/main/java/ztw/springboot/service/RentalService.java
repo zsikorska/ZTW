@@ -66,7 +66,7 @@ public class RentalService implements IRentalService {
     }
 
     @Override
-    public void updateRental(long rentalId, RentalFormDTO rentalDTO) throws RentedBookException {
+    public Rental updateRental(long rentalId, RentalFormDTO rentalDTO) throws RentedBookException {
         Rental rental = getRentalById(rentalId);
         if (rentalRepository.existsByBookIdAndReturned(rentalDTO.getBookId(), false) &&
                 rentalDTO.getBookId() != rental.getBook().getId())
@@ -77,11 +77,12 @@ public class RentalService implements IRentalService {
         rental.setDateOfRental(rentalDTO.getDateOfRental());
         rental.setDateOfReturn(rentalDTO.getDateOfReturn());
         rental.setReturned(rentalDTO.isReturned());
-        rentalRepository.save(rental);
+        return rentalRepository.save(rental);
     }
 
     @Override
-    public void deleteRental(long rentalId) {
+    public String deleteRental(long rentalId) {
         rentalRepository.deleteById(rentalId);
+        return "Deleted rental with id: " + rentalId;
     }
 }
