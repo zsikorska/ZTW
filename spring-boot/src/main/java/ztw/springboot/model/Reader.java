@@ -15,6 +15,7 @@ import javax.persistence.Id;
 @Setter
 @NoArgsConstructor
 public class Reader {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Schema(description = "Reader id", example = "1")
