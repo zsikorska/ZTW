@@ -13,16 +13,16 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Rental {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "Rental id", example = "1")
     private long id;
 
-    @Schema(description = "Book id", example = "1")
+    @Schema(description = "Book")
     @ManyToOne
     @JoinColumn(name = "book_id")
     private Book book;
 
-    @Schema(description = "Reader id", example = "1")
+    @Schema(description = "Reader")
     @ManyToOne
     @JoinColumn(name = "reader_id")
     private Reader reader;
@@ -35,4 +35,13 @@ public class Rental {
 
     @Schema(description = "If book was returned", example = "true")
     private boolean returned;
+
+    public Rental(Book book, Reader reader, String dateOfRental, String dateOfReturn, boolean returned) {
+        this.book = book;
+        this.reader = reader;
+        this.dateOfRental = dateOfRental;
+        this.dateOfReturn = dateOfReturn;
+        this.returned = returned;
+    }
+
 }

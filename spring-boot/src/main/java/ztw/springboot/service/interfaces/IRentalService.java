@@ -9,6 +9,8 @@ public interface IRentalService {
 
     List<Rental> getRentals();
 
+    List<Rental> getActiveRentals();
+
     Rental getRentalById(long id);
 
     Rental addRental(RentalFormDTO rentalDTO);
@@ -16,4 +18,5 @@ public interface IRentalService {
     void updateRental(long rentalId, RentalFormDTO rentalDTO);
 
     void deleteRental(long id);
+
 }

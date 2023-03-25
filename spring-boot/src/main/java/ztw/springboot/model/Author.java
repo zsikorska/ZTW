@@ -16,7 +16,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 public class Author {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "Author id", example = "1")
     private long id;
     @Schema(description = "First name", example = "Joanne")

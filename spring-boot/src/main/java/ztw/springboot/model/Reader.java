@@ -17,7 +17,7 @@ import javax.persistence.Id;
 public class Reader {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "Reader id", example = "1")
     private long id;
 
