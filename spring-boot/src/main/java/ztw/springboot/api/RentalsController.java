@@ -1,28 +1,32 @@
 package ztw.springboot.api;
 
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ztw.springboot.api.dto.RentalFormDTO;
 import ztw.springboot.exception.RentedBookException;
+import ztw.springboot.model.Rental;
 import ztw.springboot.service.interfaces.IRentalService;
+
+import java.util.List;
 
 
 @RestController
 @RequestMapping("/rentals")
 public class RentalsController {
+    final IRentalService rentalService;
 
-    @Autowired
-    IRentalService rentalService;
+    public RentalsController(IRentalService rentalService) {
+        this.rentalService = rentalService;
+    }
 
     @GetMapping
     @Operation(
             summary = "Get rentals",
             description = "Get all rentals in the database"
     )
-    public ResponseEntity<?> getRentals() {
+    public ResponseEntity<List<Rental>> getRentals() {
         return ResponseEntity.ok(rentalService.getRentals());
     }
 
@@ -31,7 +35,7 @@ public class RentalsController {
             summary = "Get active rentals",
             description = "Get all active rentals in the database"
     )
-    public ResponseEntity<?> getActiveRentals() {
+    public ResponseEntity<List<Rental>> getActiveRentals() {
         return ResponseEntity.ok(rentalService.getActiveRentals());
     }
 
@@ -40,7 +44,7 @@ public class RentalsController {
             summary = "Get rental",
             description = "Get rental by id"
     )
-    public ResponseEntity<?> getRental(@PathVariable("id") long rentalId) {
+    public ResponseEntity<Rental> getRental(@PathVariable("id") long rentalId) {
         return ResponseEntity.ok(rentalService.getRentalById(rentalId));
     }
 
@@ -49,7 +53,7 @@ public class RentalsController {
             summary = "Get rentals by reader id",
             description = "Get all rentals by reader id"
     )
-    public ResponseEntity<?> getRentalsByReaderId(@PathVariable("id") long readerId) {
+    public ResponseEntity<List<Rental>> getRentalsByReaderId(@PathVariable("id") long readerId) {
         return ResponseEntity.ok(rentalService.getRentalsByReaderId(readerId));
     }
 
@@ -59,7 +63,7 @@ public class RentalsController {
             summary = "Add new rental",
             description = "Add new rental to database"
     )
-    public ResponseEntity<?> addRental(@RequestBody RentalFormDTO rentalDTO) throws RentedBookException {
+    public ResponseEntity<Rental> addRental(@RequestBody RentalFormDTO rentalDTO) throws RentedBookException {
         return new ResponseEntity<>(rentalService.addRental(rentalDTO), HttpStatus.CREATED);
     }
 
@@ -68,7 +72,7 @@ public class RentalsController {
             summary = "Update rental",
             description = "Update rental data by id"
     )
-    public ResponseEntity<?> updateRental(@PathVariable("id") long rentalId, @RequestBody RentalFormDTO rentalDTO) throws RentedBookException {
+    public ResponseEntity<Rental> updateRental(@PathVariable("id") long rentalId, @RequestBody RentalFormDTO rentalDTO) throws RentedBookException {
         return new ResponseEntity<>(rentalService.updateRental(rentalId, rentalDTO), HttpStatus.OK);
     }
 
