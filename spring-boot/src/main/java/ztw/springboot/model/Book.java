@@ -14,12 +14,15 @@ import java.util.List;
 @Getter
 @Setter
 public class Book {
-    @Schema(description = "Number of pages", example = "120")
-    int pages;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(description = "Book id", example = "1")
     private long id;
+
+    @Schema(description = "Number of pages", example = "120")
+    int pages;
+
     @Schema(description = "Title of the book", example = "Harry Potter and the Philosophers Stone")
     private String title;
     @ManyToMany

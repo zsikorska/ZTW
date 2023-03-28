@@ -35,6 +35,15 @@ public class BooksController {
         return new ResponseEntity<>(booksService.getBook(bookId), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/author/{id}")
+    @Operation(
+            summary = "Get books by author id",
+            description = "Get all books by author id"
+    )
+    public ResponseEntity<Object> getBooksByAuthorId(@PathVariable("id") long authorId) {
+        return new ResponseEntity<>(booksService.getBooksByAuthorId(authorId), HttpStatus.OK);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(
