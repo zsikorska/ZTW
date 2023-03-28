@@ -1,14 +1,15 @@
 package ztw.springboot.service;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import ztw.springboot.api.dto.AuthorFormDTO;
 import ztw.springboot.model.Author;
 import ztw.springboot.repository.AuthorRepository;
 import ztw.springboot.service.interfaces.IAuthorService;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 public class AuthorService implements IAuthorService {
@@ -26,7 +27,7 @@ public class AuthorService implements IAuthorService {
 
     public Author getAuthorById(long id) {
         return authorRepository.findById(id).orElseThrow(
-                () -> new NoSuchElementException("Author with id: '" + id + "' not found")
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Author with id: '" + id + "' not found")
         );
     }
 

@@ -1,7 +1,9 @@
 package ztw.springboot.service;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import ztw.springboot.api.dto.BookFormDTO;
 import ztw.springboot.model.Book;
 import ztw.springboot.repository.BookRepository;
@@ -9,7 +11,6 @@ import ztw.springboot.service.interfaces.IBooksService;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.NoSuchElementException;
 
 @Service
 public class BooksService implements IBooksService {
@@ -38,7 +39,7 @@ public class BooksService implements IBooksService {
     @Override
     public Book getBook(long id) {
         return bookRepository.findById(id).orElseThrow(
-                () -> new NoSuchElementException("Book with id: '" + id + "' not found")
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Book with id: '" + id + "' not found")
         );
     }
 
