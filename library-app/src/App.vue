@@ -1,62 +1,41 @@
-<template>
-  <div id="app" class="small-container">
-    <h1>Authors</h1>
-    <author-form @add:author="addAuthor" />
-    <authors-table :authorSource="authors" />
-  </div>
-</template>
 <script>
-import AuthorsTable from "@/components/AuthorsTable.vue";
-import AuthorForm from "@/components/AuthorForm.vue";
+import Home from "./HomePage.vue";
+import Authors from "./AuthorsPage.vue";
+import Books from "./BooksPage.vue";
+import Rentals from "./RentalsPage.vue";
+
+const routes = {
+  "/": Home,
+  "/authors": Authors,
+  "/books": Books,
+  "/rentals": Rentals,
+};
 
 export default {
-  name: "app",
-  components: {
-    AuthorsTable,
-    AuthorForm,
-  },
   data() {
     return {
-      authors: [],
+      currentPath: window.location.hash,
     };
   },
-  methods: {
-    async addAuthor(author) {
-      const requestOptions = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(author)
-  };
-      const response = await fetch(
-          "http://localhost:8080/authors",
-          requestOptions
-        );
-        const data = await response.json();
-      this.authors = [...this.authors, data];
-    },
-    async getAuthors() {
-      try {
-        const response = await fetch(
-          "http://localhost:8080/authors"
-        );
-        const data = await response.json();
-        this.authors = data;
-      } catch (error) {
-        console.error(error);
-      }
+  computed: {
+    currentView() {
+      return routes[this.currentPath.slice(1) || "/"];
     },
   },
   mounted() {
-    this.getAuthors();
+    window.addEventListener("hashchange", () => {
+      this.currentPath = window.location.hash;
+    });
   },
 };
 </script>
-<style>
-button {
-  background: #009435;
-  border: 1px solid #009435;
-}
-.small-container {
-  max-width: 680px;
-}
-</style>
+
+<template>
+  <div>
+    <a href="#/">Home |</a>
+    <a href="#/authors">Authors |</a>
+    <a href="#/books">Books |</a>
+    <a href="#/rentals">Rentals</a>
+    <component :is="currentView" />
+  </div>
+</template>
