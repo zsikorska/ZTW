@@ -61,6 +61,7 @@ export default {
       this.getAuthors()
     },
     async deleteAuthor(index) {
+      console.log(index)
       const response = await fetch("http://localhost:8080/authors/" + index, {
         method: "DELETE",
       });

@@ -1,9 +1,9 @@
 <template>
   <div id="author-form">
-    <form @submit.prevent="handleSubmit">
+    <form>
       <!-- TODO investigate why author data doesnt show up unless below line present -->
-      <div v-if="authorDataSource.id != null">
-        <p v-text="`Author id: ${authorDataSource.id}`"></p>
+      <div v-if="author.id != null">
+        <p v-text="`Author id: ${author.id}`"></p>
       </div>
       <label>First name</label>
       <input
@@ -23,9 +23,11 @@
       <p v-if="error && submitting" class="error-message">
         Fill out requested fields
       </p>
-      <p v-if="success" class="success-message">Data has been saved successfully</p>
-      <button>Save</button>
-      <button v-if="authorDataSource.id != null" type='reset'>Reset</button>
+      <p v-if="success" class="success-message">
+        Data has been saved successfully
+      </p>
+      <button @click="handleSubmit">Save</button>
+      <button v-if="author.id != null" @click="reset">Reset</button>
     </form>
   </div>
 </template>
@@ -40,15 +42,14 @@ export default {
       submitting: false,
       error: false,
       success: false,
-      author: {
-        firstName: "",
-        lastName: "",
-      }
+      author: JSON.parse(JSON.stringify(this.authorDataSource)),
     };
   },
-  //TODO something is wrong with this, because reset creates blank input until you click
-  beforeUpdate() {
-    this.author = this.authorDataSource
+
+  watch: {
+    authorDataSource() {
+      this.author = JSON.parse(JSON.stringify(this.authorDataSource));
+    },
   },
 
   methods: {
@@ -60,12 +61,12 @@ export default {
         this.error = true;
         return;
       }
-      if(this.author.id == null) {
+      if (this.author.id == null) {
         this.$emit("add:author", this.author);
-      console.log('adding')
+        console.log("adding");
       } else {
         this.$emit("update:author", this.author);
-      console.log('updating')
+        console.log("updating");
       }
       //clear form fields
       this.author = {
@@ -80,13 +81,22 @@ export default {
       this.success = false;
       this.error = false;
     },
+    reset() {
+      this.author = JSON.parse(JSON.stringify(this.authorDataSource));
+      // this.author = this.getAuthor(this.author.id)
+      console.log(this.authorDataSource);
+    },
   },
   computed: {
     blankFirstName() {
-      return this.author.firstName === "" || this.author.firstName.trim() ==="";
+      return (
+        this.author.firstName === "" || this.author.firstName.trim() === ""
+      );
     },
     blankLastName() {
-      return this.author.lastName.trim() === "" || this.author.lastName.trim() ==="";
+      return (
+        this.author.lastName.trim() === "" || this.author.lastName.trim() === ""
+      );
     },
   },
 };

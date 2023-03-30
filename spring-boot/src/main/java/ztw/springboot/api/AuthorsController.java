@@ -62,6 +62,7 @@ public class AuthorsController {
             description = "Delete author from database"
     )
     public ResponseEntity<Void> deleteAuthor(@PathVariable("id") long authorId) {
+
         authorService.deleteAuthor(authorId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

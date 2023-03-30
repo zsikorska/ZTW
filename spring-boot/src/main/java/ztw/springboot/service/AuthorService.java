@@ -42,6 +42,7 @@ public class AuthorService implements IAuthorService {
         authorRepository.save(author);
     }
 
+    //TODO rethink author removal, so it doesnt cause sql violation
     public void deleteAuthor(long authorId) {
         authorRepository.deleteById(authorId);
     }
