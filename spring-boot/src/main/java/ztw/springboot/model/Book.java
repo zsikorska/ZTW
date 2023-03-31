@@ -43,4 +43,10 @@ public class Book {
     public void addAuthor(Author author) {
         authors.add(author);
     }
+
+    @PreRemove
+    private void removeBookFromAuthors() {
+        authors.forEach(b -> b.getBooks().remove(this));
+        authors.clear();
+    }
 }

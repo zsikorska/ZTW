@@ -1,14 +1,13 @@
 package ztw.springboot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -23,4 +22,14 @@ public class Author {
     private String firstName;
     @Schema(description = "Last name", example = "Rowling")
     private String lastName;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy="authors")
+    private Set<Book> books;
+
+    @PreRemove
+    private void removeAuthorFromBooks() {
+        books.forEach(b -> b.getAuthors().remove(this));
+        books.clear();
+    }
 }

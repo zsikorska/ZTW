@@ -1,7 +1,6 @@
 <template>
   <div id="author-form">
     <form>
-      <!-- TODO investigate why author data doesnt show up unless below line present -->
       <div v-if="author.id != null">
         <p v-text="`Author id: ${author.id}`"></p>
       </div>
