@@ -1,8 +1,16 @@
 <template>
   <div id="app" class="small-container">
-  <h1>Books</h1>    
-  <book-form :bookDataSource="bookData" @add:book="addBook" @update:book="updateBook"/>
-  <books-table :bookSource="books" @delete:book="deleteBook" @update:book="sendBookData" />
+    <h1>Books</h1>
+    <book-form
+      :bookDataSource="bookData"
+      @add:book="addBook"
+      @update:book="updateBook"
+    />
+    <books-table
+      :bookSource="books"
+      @delete:book="deleteBook"
+      @update:book="sendBookData"
+    />
   </div>
 </template>
 <script>
@@ -21,7 +29,7 @@ export default {
       bookData: {
         title: "",
         authors: [],
-        pages: 0
+        pages: 0,
       },
     };
   },
@@ -41,12 +49,17 @@ export default {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(book),
       };
-      const response = await fetch(
-        "http://localhost:8080/books",
-        requestOptions
-      );
-      const data = await response.json();
-      this.books = [...this.books, data];
+
+      try {
+        const response = await fetch(
+          "http://localhost:8080/books",
+          requestOptions
+        );
+        const data = await response.json();
+        this.books = [...this.books, data];
+      } catch (error) {
+        console.error(error);
+      }
     },
     async updateBook(book) {
       const requestOptions = {
@@ -54,29 +67,31 @@ export default {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(book),
       };
-      const response = await fetch(
-        "http://localhost:8080/books/" + book.id,
-        requestOptions
-      );
-      console.log(response);
-      this.getBooks();
+      try {
+        await fetch("http://localhost:8080/books/" + book.id, requestOptions);
+        this.getBooks();
+      } catch (error) {
+        console.error(error);
+      }
     },
     async deleteBook(index) {
-      console.log(index);
-      const response = await fetch("http://localhost:8080/books/" + index, {
+      await fetch("http://localhost:8080/books/" + index, {
         method: "DELETE",
       });
-      console.log(response);
-      this.getBooks();
+      try {
+        this.getBooks();
+      } catch (error) {
+        console.error(error);
+      }
     },
     sendBookData(book) {
-      console.log(book)
-      this.bookData = book
+      this.bookData = book;
     },
   },
   mounted() {
     this.getBooks();
   },
-}
+};
 </script>
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+<style src="vue-multiselect/dist/vue-multiselect.min.css">
+</style>

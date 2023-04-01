@@ -25,14 +25,14 @@
           </td>
           <td>{{ book.pages }}</td>
           <td>
-            <button
+            <b-button variant="primary"
               @click="$emit('update:book', JSON.parse(JSON.stringify(book)))"
             >
               UPDATE
-            </button>
+            </b-button>
           </td>
           <td>
-            <button @click="$emit('delete:book', book.id)">DELETE</button>
+            <b-button variant="danger" @click="$emit('delete:book', book.id)">DELETE</b-button>
           </td>
         </tr>
       </tbody>

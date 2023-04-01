@@ -31,7 +31,7 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div id="nav">
     <a href="#/">Home |</a>
     <a href="#/authors">Authors |</a>
     <a href="#/books">Books |</a>

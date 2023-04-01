@@ -1,8 +1,11 @@
 <template>
   <div id="book-form">
-    <form>
+    <b-form>
       <div v-if="book.id != null">
-        <p v-text="`Book id: ${book.id}`"></p>
+        <p class="form-header" v-text="`Book id: ${book.id}`"></p>
+      </div>
+      <div v-else>
+        <p class="form-header">New book</p>
       </div>
       <label>Title</label>
       <input
@@ -13,7 +16,15 @@
         @keypress="clearStatus"
       />
       <label>Authors</label>
-      <multiselect id='multiselect' v-model="book.authorIds" :options="options" :multiple="true" :value="book.authorIds" :customLabel="authorsName" track-by="id"></multiselect>
+      <multiselect
+        id="multiselect"
+        v-model="book.authorIds"
+        :options="options"
+        :multiple="true"
+        :value="book.authorIds"
+        :customLabel="authorsName"
+        track-by="id"
+      ></multiselect>
       <label>Pages</label>
       <input
         v-model="book.pages"
@@ -25,12 +36,22 @@
       <p v-if="error && submitting" class="error-message">
         Fill out requested fields
       </p>
+      <p v-if="error && invalidPageNumber" class="error-message">
+        Page number must be > 0
+      </p>
       <p v-if="success" class="success-message">
         Data has been saved successfully
       </p>
-      <button @click="handleSubmit">Save</button>
-      <button v-if="book.id != null" @click="reset">Reset</button>
-    </form>
+      <div class="form-buttons">
+        <b-button variant="primary" @click="handleSubmit">Save</b-button>
+        <b-button
+          variant="outline-primary"
+          v-if="book.id != null"
+          @click="reset"
+          >Reset</b-button
+        >
+      </div>
+    </b-form>
   </div>
 </template>
 <script>
@@ -45,11 +66,10 @@ export default {
       error: false,
       success: false,
       options: [],
-      allAuthors: Array,
       book: {
         id: this.bookDataSource.id,
         title: this.bookDataSource.title,
-        authorIds:  JSON.parse(JSON.stringify(this.bookDataSource.authors)),
+        authorIds: JSON.parse(JSON.stringify(this.bookDataSource.authors)),
         pages: this.bookDataSource.pages,
       },
       currentAuthors: this.bookDataSource,
@@ -58,7 +78,7 @@ export default {
 
   watch: {
     bookDataSource() {
-        console.log(this.book.authorIds)
+      console.log(this.book.authorIds);
       this.book = {
         id: this.bookDataSource.id,
         title: this.bookDataSource.title,
@@ -68,8 +88,8 @@ export default {
     },
   },
   mounted() {
-      this.getAuthors().then((authors) => this.options = authors);
-    },
+    this.getAuthors().then((authors) => (this.options = authors));
+  },
 
   methods: {
     async getAuthors() {
@@ -81,10 +101,10 @@ export default {
         console.error(error);
       }
     },
-    authorsName ({ firstName, lastName }) {
-      return `${firstName} ${lastName}`
+    authorsName({ firstName, lastName }) {
+      return `${firstName} ${lastName}`;
     },
-    
+
     handleSubmit() {
       this.submitting = true;
       this.clearStatus();
@@ -93,14 +113,12 @@ export default {
         this.error = true;
         return;
       }
-      if (this.book.id == null) {        
-        this.book.authorIds = this.book.authorIds.map((a) => a.id)
+      if (this.book.id == null) {
+        this.book.authorIds = this.book.authorIds.map((a) => a.id);
         this.$emit("add:book", this.book);
-        console.log("adding");
-      } else {   
-        this.book.authorIds = this.book.authorIds.map((a) => a.id)
+      } else {
+        this.book.authorIds = this.book.authorIds.map((a) => a.id);
         this.$emit("update:book", this.book);
-        console.log("updating");
       }
       //clear form fields
       this.book = {
@@ -118,9 +136,9 @@ export default {
     },
     reset() {
       this.book = JSON.parse(JSON.stringify(this.bookDataSource));
-      this.book.authorIds = JSON.parse(JSON.stringify(this.bookDataSource.authors));
-      // this.book = this.getbook(this.book.id)
-      console.log(this.bookDataSource);
+      this.book.authorIds = JSON.parse(
+        JSON.stringify(this.bookDataSource.authors)
+      );
     },
   },
   computed: {
@@ -145,5 +163,13 @@ form {
 }
 .success-message {
   color: #32a95d;
+}
+
+.form-buttons button{
+  margin: 10px;
+}
+.form-header {
+  font-size: 20px;
+  color: #0d6efd;
 }
 </style>

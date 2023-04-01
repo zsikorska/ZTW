@@ -21,16 +21,16 @@
           <td>{{ author.firstName }}</td>
           <td>{{ author.lastName }}</td>
           <td>
-            <button
+            <b-button variant="primary"
               @click="
                 $emit('update:author', JSON.parse(JSON.stringify(author)))
               "
             >
               UPDATE
-            </button>
+            </b-button>
           </td>
           <td>
-            <button @click="$emit('delete:author', author.id)">DELETE</button>
+            <b-button variant="danger" @click="$emit('delete:author', author.id)">DELETE</b-button>
           </td>
         </tr>
       </tbody>

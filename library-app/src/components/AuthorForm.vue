@@ -2,7 +2,10 @@
   <div id="author-form">
     <form>
       <div v-if="author.id != null">
-        <p v-text="`Author id: ${author.id}`"></p>
+        <p class="form-header" v-text="`Author id: ${author.id}`"></p>
+      </div>
+      <div v-else>
+        <p class="form-header">New author</p>
       </div>
       <label>First name</label>
       <input
@@ -25,8 +28,8 @@
       <p v-if="success" class="success-message">
         Data has been saved successfully
       </p>
-      <button @click="handleSubmit">Save</button>
-      <button v-if="author.id != null" @click="reset">Reset</button>
+      <b-button variant="primary" @click="handleSubmit">Save</b-button>
+      <b-button variant="outline-primary" v-if="author.id != null" @click="reset">Reset</b-button>
     </form>
   </div>
 </template>
@@ -112,5 +115,12 @@ form {
 }
 .success-message {
   color: #32a95d;
+}
+.form-buttons button{
+  margin: 10px;
+}
+.form-header {
+  font-size: 20px;
+  color: #0d6efd;
 }
 </style>
