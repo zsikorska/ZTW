@@ -14,8 +14,8 @@
   </div>
 </template>
 <script>
-import BooksTable from "@/components/BooksTable.vue";
-import BookForm from "@/components/BookForm.vue";
+import BooksTable from "@/components/books/BooksTable.vue";
+import BookForm from "@/components/books/BookForm.vue";
 
 export default {
   name: "app",

@@ -6,8 +6,8 @@
     </div>
 </template>
 <script>
-import ReadersTable from "@/components/ReadersTable.vue";
-import ReaderForm from "@/components/ReaderForm.vue";
+import ReadersTable from "@/components/readers/ReadersTable.vue";
+import ReaderForm from "@/components/readers/ReaderForm.vue";
 
 export default {
     name: "app",

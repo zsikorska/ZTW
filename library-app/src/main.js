@@ -3,10 +3,10 @@ import App from './App.vue'
 import SmartTable from 'vuejs-smart-table'
 import VueRouter from 'vue-router';
 import HomePage from "./components/HomePage.vue";
-import AuthorsPage from "./components/AuthorsPage.vue";
-import BooksPage from "./components/BooksPage.vue";
-import RentalsPage from "./components/RentalsPage.vue";
-import ReadersPage from "@/components/ReadersPage.vue";
+import AuthorsPage from "./components/authors/AuthorsPage.vue";
+import BooksPage from "./components/books/BooksPage.vue";
+import RentalsPage from "./components/rentals/RentalsPage.vue";
+import ReadersPage from "@/components/readers/ReadersPage.vue";
 
 import { BootstrapVue } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -32,9 +32,9 @@ const router = new VueRouter({
       name: 'books'
     },
     {
-        path: '/readers',
-        component: ReadersPage,
-        name: 'readers'
+      path: '/readers',
+      component: ReadersPage,
+      name: 'readers'
     },
     {
       path: '/rentals',

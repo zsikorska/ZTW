@@ -15,8 +15,8 @@
     </div>
 </template>
 <script>
-import RentalsTable from "@/components/RentalsTable.vue";
-import RentalForm from "@/components/RentalForm.vue";
+import RentalsTable from "@/components/rentals/RentalsTable.vue";
+import RentalForm from "@/components/rentals/RentalForm.vue";
 
 export default {
     name: "app",

@@ -6,8 +6,8 @@
   </div>
 </template>
 <script>
-import AuthorsTable from "@/components/AuthorsTable.vue";
-import AuthorForm from "@/components/AuthorForm.vue";
+import AuthorsTable from "@/components/authors/AuthorsTable.vue";
+import AuthorForm from "@/components/authors/AuthorForm.vue";
 
 export default {
   name: "app",
@@ -85,5 +85,6 @@ button {
 }
 .small-container {
   max-width: 680px;
+  margin: 40px auto;
 }
 </style>
