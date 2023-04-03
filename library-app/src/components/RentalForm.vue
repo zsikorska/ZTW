@@ -158,12 +158,12 @@ export default {
                 return;
             }
             if (this.rental.id == null) {
-                this.rental.bookId = this.rental.bookId.map((a) => a.id);
-                this.rental.readerId = this.rental.readerId.map((a) => a.id);
+                this.rental.bookId = this.rental.bookId.id;
+                this.rental.readerId = this.rental.readerId.id;
                 this.$emit("add:rental", this.rental);
             } else {
-                this.rental.bookId = this.rental.bookId.map((a) => a.id);
-                this.rental.readerId = this.rental.readerId.map((a) => a.id);
+                this.rental.bookId = this.rental.bookId.id;
+                this.rental.readerId = this.rental.readerId.id;
                 this.$emit("update:rental", this.rental);
             }
             //clear form fields
