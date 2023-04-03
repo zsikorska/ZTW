@@ -11,10 +11,11 @@
             <multiselect
                 id="multiselect"
                 v-model="rental.bookId"
-                :options="optionsBooks"
+                :options="availableBooksSource"
                 :multiple="false"
                 :value="rental.bookId"
                 :customLabel="bookTitle"
+                :class="{ 'has-error': submitting && blankBook }"
                 track-by="id"
             ></multiselect>
 
@@ -26,6 +27,7 @@
                 :multiple="false"
                 :value="rental.readerId"
                 :customLabel="readerName"
+                :class="{ 'has-error': submitting && blankReader }"
                 track-by="id"
             ></multiselect>
 
@@ -33,7 +35,7 @@
             <input
                 v-model="rental.dateOfRental"
                 type="date"
-                :class="{ 'has-error': submitting && blankBook }"
+                :class="{ 'has-error': submitting && blankDateOfRental }"
                 @focus="clearStatus"
                 @keypress="clearStatus"
             />
@@ -42,7 +44,7 @@
             <input
                 v-model="rental.dateOfReturn"
                 type="date"
-                :class="{ 'has-error': submitting && blankBook }"
+                :class="{ 'has-error': submitting && blankDateOfReturn }"
                 @focus="clearStatus"
                 @keypress="clearStatus"
             />
@@ -80,6 +82,7 @@ export default {
     name: "rental-form",
     props: {
         rentalDataSource: Object,
+        availableBooksSource: Array,
     },
     data() {
         return {
@@ -87,7 +90,6 @@ export default {
             error: false,
             success: false,
             optionsReaders: [],
-            optionsBooks: [],
             rental: {
                 id: this.rentalDataSource.id,
                 bookId: JSON.parse(JSON.stringify(this.rentalDataSource.book)),
@@ -98,6 +100,7 @@ export default {
             },
             currentBooks: this.rentalDataSource,
             currentReaders: this.rentalDataSource,
+
         };
     },
 
@@ -117,23 +120,12 @@ export default {
     },
     mounted() {
         this.getReaders().then((readers) => (this.optionsReaders = readers));
-        this.getBooks().then((books) => (this.optionsBooks = books));
     },
 
     methods: {
         async getReaders() {
             try {
                 const response = await fetch("http://localhost:8080/readers");
-                const data = await response.json();
-                return data;
-            } catch (error) {
-                console.error(error);
-            }
-        },
-
-        async getBooks() {
-            try {
-                const response = await fetch("http://localhost:8080/books");
                 const data = await response.json();
                 return data;
             } catch (error) {
@@ -153,7 +145,7 @@ export default {
             this.submitting = true;
             this.clearStatus();
             //check form fields
-            if (this.blankBook) {
+            if (this.blankBook || this.blankReader || this.blankDateOfRental || this.blankDateOfReturn) {
                 this.error = true;
                 return;
             }
@@ -194,7 +186,16 @@ export default {
     },
     computed: {
         blankBook() {
-            return this.rental.bookId == null;
+            return this.rental.bookId === null;
+        },
+        blankReader() {
+            return this.rental.readerId === null;
+        },
+        blankDateOfRental() {
+            return this.rental.dateOfRental === "";
+        },
+        blankDateOfReturn() {
+            return this.rental.dateOfReturn === "";
         },
 
     },

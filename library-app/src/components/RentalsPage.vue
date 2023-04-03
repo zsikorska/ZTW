@@ -3,6 +3,7 @@
         <h1>Rentals</h1>
         <rental-form
                 :rentalDataSource="rentalData"
+                :availableBooksSource="availableBooks"
                 @add:rental="addRental"
                 @update:rental="updateRental"
         />
@@ -33,6 +34,7 @@ export default {
                 dateOfReturn: "",
                 returned: false,
             },
+            availableBooks: [],
         };
     },
     methods: {
@@ -59,6 +61,7 @@ export default {
                 );
                 const data = await response.json();
                 this.rentals = [...this.rentals, data];
+                this.getAvailableBooks();
             } catch (error) {
                 console.error(error);
             }
@@ -72,6 +75,7 @@ export default {
             try {
                 await fetch("http://localhost:8080/rentals/" + rental.id, requestOptions);
                 this.getRentals();
+                this.getAvailableBooks();
             } catch (error) {
                 console.error(error);
             }
@@ -82,16 +86,29 @@ export default {
             });
             try {
                 this.getRentals();
+                this.getAvailableBooks();
             } catch (error) {
                 console.error(error);
             }
         },
+
         sendRentalData(rental) {
             this.rentalData = rental;
+        },
+
+        async getAvailableBooks() {
+            try {
+                const response = await fetch("http://localhost:8080/books/available");
+                const data = await response.json();
+                this.availableBooks = data;
+            } catch (error) {
+                console.error(error);
+            }
         },
     },
     mounted() {
         this.getRentals();
+        this.getAvailableBooks();
     },
 };
 </script>
