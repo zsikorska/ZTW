@@ -1,42 +1,24 @@
 <script>
-import Home from "./HomePage.vue";
-import Authors from "./AuthorsPage.vue";
-import Books from "./BooksPage.vue";
-import Rentals from "./RentalsPage.vue";
-
-const routes = {
-  "/": Home,
-  "/authors": Authors,
-  "/books": Books,
-  "/rentals": Rentals,
-};
 
 export default {
   data() {
     return {
-      currentPath: window.location.hash,
+      
     };
   },
-  computed: {
-    currentView() {
-      return routes[this.currentPath.slice(1) || "/"];
-    },
-  },
-  mounted() {
-    window.addEventListener("hashchange", () => {
-      this.currentPath = window.location.hash;
-    });
-  },
+  
 };
 </script>
 
 <template>
-  <div id="nav">
-    <a href="#/">Home |</a>
-    <a href="#/authors">Authors |</a>
-    <a href="#/books">Books |</a>
-    <a href="#/rentals">Rentals</a>
-    <component :is="currentView" />
+  <div id="app">
+    <b-nav>
+    <b-nav-item ><router-link :to="{name: 'home'}">Home</router-link></b-nav-item>
+    <b-nav-item><router-link :to="{name: 'books'}">Books</router-link></b-nav-item>
+    <b-nav-item><router-link :to="{name: 'authors'}">Authors</router-link></b-nav-item>
+    <b-nav-item><router-link :to="{name: 'rentals'}">Rentals</router-link></b-nav-item>
+  </b-nav>
+    <router-view></router-view>
   </div>
 </template>
 
