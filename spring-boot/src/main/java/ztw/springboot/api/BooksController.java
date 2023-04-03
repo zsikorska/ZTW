@@ -44,6 +44,15 @@ public class BooksController {
         return new ResponseEntity<>(booksService.getBooksByAuthorId(authorId), HttpStatus.OK);
     }
 
+    @GetMapping(value = "available")
+    @Operation(
+            summary = "Get available books",
+            description = "Get all books that are currently available in the library"
+    )
+    public ResponseEntity<Object> getAvailableBooks() {
+        return new ResponseEntity<>(booksService.getAvailableBooks(), HttpStatus.OK);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(

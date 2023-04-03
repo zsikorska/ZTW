@@ -12,6 +12,8 @@ public interface IRentalService {
 
     List<Rental> getActiveRentals();
 
+    List<Rental> getInactiveRentals();
+
     Rental getRentalById(long id);
 
     List<Rental> getRentalsByReaderId(long readerId);

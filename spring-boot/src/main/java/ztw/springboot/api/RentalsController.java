@@ -39,6 +39,15 @@ public class RentalsController {
         return ResponseEntity.ok(rentalService.getActiveRentals());
     }
 
+    @GetMapping("inactive")
+    @Operation(
+            summary = "Get inactive rentals",
+            description = "Get all inactive rentals in the database"
+    )
+    public ResponseEntity<List<Rental>> getInactiveRentals() {
+        return ResponseEntity.ok(rentalService.getInactiveRentals());
+    }
+
     @GetMapping("/{id}")
     @Operation(
             summary = "Get rental",
