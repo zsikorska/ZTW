@@ -6,6 +6,7 @@ import HomePage from "./components/HomePage.vue";
 import AuthorsPage from "./components/AuthorsPage.vue";
 import BooksPage from "./components/BooksPage.vue";
 import RentalsPage from "./components/RentalsPage.vue";
+import ReadersPage from "@/components/ReadersPage.vue";
 
 import { BootstrapVue } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -29,6 +30,11 @@ const router = new VueRouter({
       path: '/books',
       component: BooksPage,
       name: 'books'
+    },
+    {
+        path: '/readers',
+        component: ReadersPage,
+        name: 'readers'
     },
     {
       path: '/rentals',

@@ -16,6 +16,7 @@ export default {
     <b-nav-item ><router-link :to="{name: 'home'}">Home</router-link></b-nav-item>
     <b-nav-item><router-link :to="{name: 'books'}">Books</router-link></b-nav-item>
     <b-nav-item><router-link :to="{name: 'authors'}">Authors</router-link></b-nav-item>
+    <b-nav-item><router-link :to="{name: 'readers'}">Readers</router-link></b-nav-item>
     <b-nav-item><router-link :to="{name: 'rentals'}">Rentals</router-link></b-nav-item>
   </b-nav>
     <router-view></router-view>
