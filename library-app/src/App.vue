@@ -11,7 +11,18 @@ export default {
 </script>
 
 <template>
-  <div id="app">    
+  <div id="app">
+    
+  <b-navbar toggleable="lg" type="dark" variant="primary">
+    <b-nav>
+    <b-navbar-brand ><router-link :to="{name: 'home'}">LibraryApp</router-link></b-navbar-brand>
+    <b-nav-item ></b-nav-item>
+    <b-nav-item active><router-link :to="{name: 'books'}">Books</router-link></b-nav-item>
+    <b-nav-item><router-link :to="{name: 'authors'}">Authors</router-link></b-nav-item>
+    <b-nav-item><router-link :to="{name: 'readers'}">Readers</router-link></b-nav-item>
+    <b-nav-item><router-link :to="{name: 'rentals'}">Rentals</router-link></b-nav-item>
+  </b-nav>
+  </b-navbar>
     <router-view></router-view>
   </div>
 </template>
