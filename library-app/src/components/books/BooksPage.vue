@@ -13,12 +13,19 @@
     />
   </div>
 </template>
+
 <script>
 import BooksTable from "@/components/books/BooksTable.vue";
 import BookForm from "@/components/books/BookForm.vue";
+import LayoutDefault from "@/layouts/LayoutDefault.vue";
 
 export default {
-  name: "app",
+
+    name: 'Books',
+    created() {
+        this.$emit('update:layout', LayoutDefault);
+    },
+
   components: {
     BooksTable,
     BookForm,

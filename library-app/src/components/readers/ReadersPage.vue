@@ -5,12 +5,19 @@
         <readers-table :readerSource="readers" @delete:reader="deleteReader" @update:reader="sendReaderData" />
     </div>
 </template>
+
 <script>
 import ReadersTable from "@/components/readers/ReadersTable.vue";
 import ReaderForm from "@/components/readers/ReaderForm.vue";
+import LayoutDefault from "@/layouts/LayoutDefault.vue";
 
 export default {
-    name: "app",
+
+    name: 'Readers',
+    created() {
+        this.$emit('update:layout', LayoutDefault);
+    },
+
     components: {
         ReadersTable,
         ReaderForm,

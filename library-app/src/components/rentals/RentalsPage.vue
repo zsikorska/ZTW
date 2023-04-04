@@ -14,12 +14,19 @@
         />
     </div>
 </template>
+
 <script>
 import RentalsTable from "@/components/rentals/RentalsTable.vue";
 import RentalForm from "@/components/rentals/RentalForm.vue";
+import LayoutDefault from "@/layouts/LayoutDefault.vue";
 
 export default {
-    name: "app",
+
+    name: 'Rentals',
+    created() {
+        this.$emit('update:layout', LayoutDefault);
+    },
+
     components: {
         RentalsTable,
         RentalForm,

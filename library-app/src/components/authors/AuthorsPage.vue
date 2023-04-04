@@ -5,12 +5,19 @@
     <authors-table :authorSource="authors" @delete:author="deleteAuthor" @update:author="sendAuthorData" />
   </div>
 </template>
+
 <script>
 import AuthorsTable from "@/components/authors/AuthorsTable.vue";
 import AuthorForm from "@/components/authors/AuthorForm.vue";
+import LayoutDefault from "@/layouts/LayoutDefault.vue";
 
 export default {
-  name: "app",
+
+    name: 'Authors',
+    created() {
+        this.$emit('update:layout', LayoutDefault);
+    },
+
   components: {
     AuthorsTable,
     AuthorForm,

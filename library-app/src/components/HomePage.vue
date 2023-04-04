@@ -61,7 +61,15 @@
 </template>
 
 <script>
+import LayoutDefault from "@/layouts/LayoutDefault.vue";
+
 export default {
+
+    name: 'Home',
+    created() {
+        this.$emit('update:layout', LayoutDefault);
+    },
+
   data() {
     return {
       slide: 0,
@@ -78,6 +86,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .article {
   padding: 40px;
