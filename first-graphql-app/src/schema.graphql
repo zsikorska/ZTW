@@ -1,25 +1,34 @@
+
 type Query {
-    demo: String!
+    todos: [ToDoItem!]
+    todo(id: ID!): ToDoItem
+    users: [User!]
+    user(id: ID!): User
 }
 
 type ToDoItem{
-id: ID!
-title: String!
-completed: Boolean!
-user: User!
+    id: ID!
+    title: String!
+    completed: Boolean!
+    user: User!
 }
 
 type User{
-id: ID!
-name: String!
-email: String!
-login: String!
-todos: [ToDoItem!]!
+    id: ID!
+    name: String!
+    email: String!
+    login: String!
+    todos: [ToDoItem!]!
 }
 
-type Query {
-todos: [ToDoItem!]
-todo(id: ID!): ToDoItem
-users: [User!]
-user(id: ID!): User
+input UserInput {
+    name: String!
+    email: String!
+    login: String!
 }
+
+type Mutation {
+    createUser(input: UserInput!): User!
+    updateUser(id: ID!, input: UserInput!): User!
+}
+

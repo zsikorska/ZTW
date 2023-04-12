@@ -1,9 +1,19 @@
 const { GraphQLServer } = require('graphql-yoga');
-const axios = require("axios")
+const axios = require("axios");
+const { Client } = require('pg');
+
+const client = new Client({
+    host: 'localhost',
+    user: 'postgres',
+    database: 'todo',
+    password: 'root',
+    port: 5432,
+  });
+client.connect()
 
 const resolvers = {
     Query: {
-    users: async () => getRestUsersList(),
+    users: async () => getDBUsersList(),
     todos: () => getRestTodoList(),
     todo: (parent, args, context, info) => todoById(args.id),
     user: (parent, args, context, info) => userById(args.id),
@@ -18,6 +28,29 @@ const resolvers = {
             return userById(parent.userId);
         }
     },
+
+    Mutation: {
+        createUser: async (_, {input}) => {
+            try {
+                const {rows} = await client.query('INSERT INTO users (name, email, login) VALUES ($1, $2, $3) RETURNING *',
+                 [input.name, input.email, input.login]);
+                return rows[0];
+            } catch (error) {
+                throw error
+            }
+        },
+        updateUser: async ( _, {id, input}) => {
+            try {
+                console.log(input)
+                const {rows} = await client.query('UPDATE users SET name = $1, email = $2, login = $3 WHERE id = $4 RETURNING *',
+                 [input.name, input.email, input.login, id]);
+                 console.log(rows)
+                return rows[0];
+            } catch (error) {
+                throw error
+            }
+        }
+    }
 }
 
 const server = new GraphQLServer({
@@ -54,16 +87,27 @@ async function userById(id) {
         throw error
     }
 }
-async function getRestUsersList() {
+async function getDBUsersList() {
     try {
-        const users = await axios.get("https://jsonplaceholder.typicode.com/users")
-        console.log(users);
-        return users.data.map(({ id, name, email, username }) => ({
-            id: id,
-            name: name,
-            email: email,
-            login: username,
-        }))
+        try {
+            const {rows} = await client.query('SELECT * FROM users');
+            return rows;
+        } catch (error) {
+            console.log(error)
+        }
+    } catch (error) {
+        throw error
+    }
+}
+
+async function createUser() {
+    try {
+        try {
+            const {rows} = await client.query('SELECT * FROM users');
+            return rows;
+        } catch (error) {
+            console.log(error)
+        }
     } catch (error) {
         throw error
     }
