@@ -41,10 +41,16 @@ const resolvers = {
         },
         updateUser: async ( _, {id, input}) => {
             try {
-                console.log(input)
                 const {rows} = await client.query('UPDATE users SET name = $1, email = $2, login = $3 WHERE id = $4 RETURNING *',
                  [input.name, input.email, input.login, id]);
-                 console.log(rows)
+                return rows[0];
+            } catch (error) {
+                throw error
+            }
+        },
+        deleteUser: async ( _, {id}) => {
+            try {
+                const {rows} = await client.query('DELETE FROM users WHERE id = $1 RETURNING *', [id]);
                 return rows[0];
             } catch (error) {
                 throw error
@@ -62,16 +68,21 @@ const resolvers = {
         },
         updateToDoItem: async ( _, {id, input}) => {
             try {
-                console.log(input)
                 const {rows} = await client.query('UPDATE todos SET title = $1, completed = $2, userid = $3 WHERE id = $4 RETURNING *',
                     [input.title, input.completed, input.userId, id]);
-                console.log(rows)
+                return rows[0];
+            } catch (error) {
+                throw error
+            }
+        },
+        deleteToDoItem: async ( _, {id}) => {
+            try {
+                const {rows} = await client.query('DELETE FROM todos WHERE id = $1 RETURNING *', [id]);
                 return rows[0];
             } catch (error) {
                 throw error
             }
         }
-
     }
 }
 
@@ -87,7 +98,6 @@ async function todosByUserId(id) {
         const {rows} = await client.query('SELECT * FROM todos WHERE userid = $1', [id]);
         return rows;
     } catch (error) {
-        console.log(error)
         throw error
     }
 }
@@ -97,7 +107,6 @@ async function todoById(id) {
         const {rows} = await client.query('SELECT * FROM todos WHERE id = $1', [id]);
         return rows[0];
     } catch (error) {
-        console.log(error)
         throw error
     }
 }
@@ -107,18 +116,13 @@ async function userById(id) {
         const {rows} = await client.query('SELECT * FROM users WHERE id = $1', [id]);
         return rows[0];
     } catch (error) {
-        console.log(error)
         throw error
     }
 }
 async function getDBUsersList() {
     try {
-        try {
-            const {rows} = await client.query('SELECT * FROM users');
-            return rows;
-        } catch (error) {
-            console.log(error)
-        }
+        const {rows} = await client.query('SELECT * FROM users');
+        return rows;
     } catch (error) {
         throw error
     }
@@ -129,7 +133,6 @@ async function getDBTodoList() {
         const {rows} = await client.query('SELECT * FROM todos');
         return rows;
     } catch (error) {
-        console.log(error)
         throw error
     }
 }
