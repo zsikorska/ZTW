@@ -14,7 +14,7 @@ client.connect()
 const resolvers = {
     Query: {
     users: async () => getDBUsersList(),
-    todos: () => getRestTodoList(),
+    todos: () => getDBTodoList(),
     todo: (parent, args, context, info) => todoById(args.id),
     user: (parent, args, context, info) => userById(args.id),
     },
@@ -25,7 +25,7 @@ const resolvers = {
     },
     ToDoItem: {
         user: (parent, args, context, info) => {
-            return userById(parent.userId);
+            return userById(parent.userid);
         }
     },
 
@@ -49,7 +49,29 @@ const resolvers = {
             } catch (error) {
                 throw error
             }
+        },
+
+        createToDoItem: async (_, {input}) => {
+            try {
+                const {rows} = await client.query('INSERT INTO todos (title, completed, userid) VALUES ($1, $2, $3) RETURNING *',
+                    [input.title, input.completed, input.userId]);
+                return rows[0];
+            } catch (error) {
+                throw error
+            }
+        },
+        updateToDoItem: async ( _, {id, input}) => {
+            try {
+                console.log(input)
+                const {rows} = await client.query('UPDATE todos SET title = $1, completed = $2, userid = $3 WHERE id = $4 RETURNING *',
+                    [input.title, input.completed, input.userId, id]);
+                console.log(rows)
+                return rows[0];
+            } catch (error) {
+                throw error
+            }
         }
+
     }
 }
 
@@ -62,28 +84,30 @@ server.start(() => console.log(`Server is running on http://localhost:4000`));
 
 async function todosByUserId(id) {
     try {
-        const todos = await axios.get(`https://jsonplaceholder.typicode.com/todos?userId=${id}`)
-        return todos.data
+        const {rows} = await client.query('SELECT * FROM todos WHERE userid = $1', [id]);
+        return rows;
     } catch (error) {
+        console.log(error)
         throw error
     }
 }
 
 async function todoById(id) {
     try {
-        const user = await axios.get(`https://jsonplaceholder.typicode.com/todos/${id}`)
-        return user.data
+        const {rows} = await client.query('SELECT * FROM todos WHERE id = $1', [id]);
+        return rows[0];
     } catch (error) {
+        console.log(error)
         throw error
     }
 }
 
 async function userById(id) {
     try {
-        const user = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
-        console.log('user by id')
-        return user.data
+        const {rows} = await client.query('SELECT * FROM users WHERE id = $1', [id]);
+        return rows[0];
     } catch (error) {
+        console.log(error)
         throw error
     }
 }
@@ -100,24 +124,12 @@ async function getDBUsersList() {
     }
 }
 
-async function createUser() {
+async function getDBTodoList() {
     try {
-        try {
-            const {rows} = await client.query('SELECT * FROM users');
-            return rows;
-        } catch (error) {
-            console.log(error)
-        }
+        const {rows} = await client.query('SELECT * FROM todos');
+        return rows;
     } catch (error) {
-        throw error
-    }
-}
-
-async function getRestTodoList() {
-    try {
-        const todos = await axios.get("https://jsonplaceholder.typicode.com/todos")
-        return todos.data
-    } catch (error) {
+        console.log(error)
         throw error
     }
 }

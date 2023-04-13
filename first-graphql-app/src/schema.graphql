@@ -27,8 +27,17 @@ input UserInput {
     login: String!
 }
 
+input ToDoItemInput {
+    title: String!
+    completed: Boolean!
+    userId: ID!
+}
+
 type Mutation {
     createUser(input: UserInput!): User!
     updateUser(id: ID!, input: UserInput!): User!
+
+    createToDoItem(input: ToDoItemInput!): ToDoItem!
+    updateToDoItem(id: ID!, input: ToDoItemInput!): ToDoItem!
 }
 
