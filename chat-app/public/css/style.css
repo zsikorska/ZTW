@@ -93,7 +93,24 @@ a {
 	flex-direction: column;
 }
 
-.chat-messages .message {
+.chat-messages .messages {
+	display: flex;
+	flex-direction: column;
+}
+
+.typing-indicator-active {
+	padding: 10px;
+	margin-bottom: 15px;
+	border-radius: 5px;
+	max-width: 70%;
+	position: relative;
+	display: inline-block;
+	margin-right: auto;
+	background-color: #f8f7f7;
+	color: var(--dark-color-b);
+}
+
+.chat-messages .messages .message {
 	padding: 10px;
 	margin-bottom: 15px;
 	background-color: var(--light-color);
@@ -104,7 +121,7 @@ a {
 	display: inline-block;
 }
 
-.chat-messages .message .meta {
+.chat-messages .messages .message .meta {
 	font-size: 15px;
 	font-weight: bold;
 	color: var(--dark-color-b);
@@ -113,7 +130,7 @@ a {
 	text-align: left;
 }
 
-.chat-messages .message .meta span {
+.chat-messages .messages .message .meta span {
 	color: #777;
 }
 

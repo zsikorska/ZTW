@@ -34,6 +34,16 @@ io.on('connection', (socket) => {
     io.to(user.room).emit('message', formatMessage(user.username, msg));
   });
 
+  socket.on('typing', () => {
+    const user = getCurrentUser(socket.id);
+    socket.broadcast.to(user.room).emit('typing', user.username);
+  });
+
+  socket.on('stoppedTyping', () => {
+    const user = getCurrentUser(socket.id);
+    socket.broadcast.to(user.room).emit('stoppedTyping');
+  });
+
   socket.on('disconnect', () => {
     const user = userLeave(socket.id);
     if (user != null) {
@@ -44,9 +54,9 @@ io.on('connection', (socket) => {
       users: getRoomUsers(user.room)
     })
   });
-
-
 });
+
+
 
 server.listen(3000, () => {
   console.log('listening on *:3000');

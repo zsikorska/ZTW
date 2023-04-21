@@ -2,6 +2,8 @@ const chatForm = document.getElementById('chat-form');
 const chatMessages = document.querySelector('.chat-messages');
 const roomUsers = document.getElementById('users');
 const roomName = document.getElementById('room-name');
+const msg = document.getElementById('msg');
+const typingIndicator = document.getElementById('typing-indicator');
 
 
 const { username, room } = Qs.parse(location.search, {
@@ -29,6 +31,7 @@ chatForm.addEventListener('submit', (e) => {
 
     e.target.elements.msg.value = ''; 
     e.target.elements.msg.focus();
+    socket.emit('stoppedTyping');
 });
 
 socket.on('room-users', ({room, users}) => {
@@ -37,7 +40,7 @@ socket.on('room-users', ({room, users}) => {
 });
 
 function publishMessage(message) {
-    const newMsgDiv = document.createElement('div'); 
+    const newMsgDiv = document.createElement('div');
     newMsgDiv.classList.add('message');
 
     // check if message is sent by the current user
@@ -48,7 +51,7 @@ function publishMessage(message) {
     }
 
     newMsgDiv.innerHTML =  `<p class="meta">${message.username} <span>${message.time}</span></p><p class="text">${message.text}</p>`;
-    document.querySelector('.chat-messages').appendChild(newMsgDiv);
+    document.querySelector('.chat-messages .messages').appendChild(newMsgDiv);
 }
 
 function updateRoomName(name) {
@@ -61,3 +64,24 @@ function updateRoomUsers(users) {
     ${users.map(user => `<li>${user.username}<\li>`).join('')}
     `; 
 }
+
+let timer;
+
+msg.addEventListener('keydown', () => {
+    socket.emit('typing');
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+        socket.emit('stoppedTyping');
+    }, 2000);
+});
+
+
+socket.on('typing', (username) => {
+    typingIndicator.textContent = `${username} is typing...`;
+    typingIndicator.classList.add("typing-indicator-active");
+});
+
+socket.on('stoppedTyping', () => {
+    typingIndicator.textContent = '';
+    typingIndicator.classList.remove("typing-indicator-active");
+});
