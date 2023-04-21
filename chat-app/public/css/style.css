@@ -89,6 +89,8 @@ a {
 	padding: 30px;
 	max-height: 500px;
 	overflow-y: scroll;
+	display: flex;
+	flex-direction: column;
 }
 
 .chat-messages .message {
@@ -97,6 +99,9 @@ a {
 	background-color: var(--light-color);
 	border-radius: 5px;
 	overflow-wrap: break-word;
+	max-width: 70%;
+	position: relative;
+	display: inline-block;
 }
 
 .chat-messages .message .meta {
@@ -105,10 +110,19 @@ a {
 	color: var(--dark-color-b);
 	opacity: 0.7;
 	margin-bottom: 7px;
+	text-align: left;
 }
 
 .chat-messages .message .meta span {
 	color: #777;
+}
+
+.message-left {
+	margin-right: auto;
+}
+
+.message-right {
+	margin-left: auto;
 }
 
 .chat-form-container {

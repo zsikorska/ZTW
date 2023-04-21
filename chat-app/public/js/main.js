@@ -39,7 +39,15 @@ socket.on('room-users', ({room, users}) => {
 function publishMessage(message) {
     const newMsgDiv = document.createElement('div'); 
     newMsgDiv.classList.add('message');
-    newMsgDiv.innerHTML =  `<p class="meta">${message.username}<span>${message.time}</span></p><p class="text">${message.text}</p>`;
+
+    // check if message is sent by the current user
+    if (message.username === username) {
+        newMsgDiv.classList.add('message-right');
+    } else {
+        newMsgDiv.classList.add('message-left');
+    }
+
+    newMsgDiv.innerHTML =  `<p class="meta">${message.username} <span>${message.time}</span></p><p class="text">${message.text}</p>`;
     document.querySelector('.chat-messages').appendChild(newMsgDiv);
 }
 
