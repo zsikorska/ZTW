@@ -36,9 +36,11 @@
             id="msg"
             type="text"
             placeholder="Enter Message"
-            required
             autocomplete="off"
           />
+          <input type="file" name="file" id="file-input" class="file-input" accept="image/*"/>
+          <label for="file-input" id="file-input-label"><i class="fas fa-file-image"></i> Choose an image</label>
+          <input type="hidden" name="max-file-size" id="max-file-size" value="1000000" />
           <button class="btn"><i class="fas fa-paper-plane"></i> Send</button>
         </form>
       </div>

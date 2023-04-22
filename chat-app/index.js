@@ -20,18 +20,18 @@ io.on('connection', (socket) => {
 
     const user = userJoin(socket.id, username, room);
     socket.join(room);
-    socket.emit('message', formatMessage('Chat Rooms', 'Welcome to ChatApp!'));
+    socket.emit('message', formatMessage('Chat Rooms', 'Welcome to ChatApp!', null));
 
-    socket.broadcast.to(user.room).emit('message', formatMessage('Chat Rooms', `${user.username} has joined the chat`));
+    socket.broadcast.to(user.room).emit('message', formatMessage('Chat Rooms', `${user.username} has joined the chat`, null));
     io.to(user.room).emit('room-users', {
       room: user.room,
       users: getRoomUsers(user.room)
     })
   });
 
-  socket.on('chat-message', (msg) => {
+  socket.on('chat-message', (msg, file) => {
     const user = getCurrentUser(socket.id);
-    io.to(user.room).emit('message', formatMessage(user.username, msg));
+    io.to(user.room).emit('message', formatMessage(user.username, msg, file));
   });
 
   socket.on('typing', () => {
@@ -47,7 +47,7 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     const user = userLeave(socket.id);
     if (user != null) {
-      io.to(user.room).emit('message', formatMessage("ChatRooms", `${user.username} has left the chat`));
+      io.to(user.room).emit('message', formatMessage("Chat Rooms", `${user.username} has left the chat`));
     }
     io.to(user.room).emit('room-users', {
       room: user.room,
