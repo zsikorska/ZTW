@@ -7,6 +7,9 @@ const { Server } = require("socket.io");
 const io = new Server(server);
 const formatMessage = require('./chatUtils/messages');
 const { userJoin, getCurrentUser, userLeave, getRoomUsers } = require('./chatUtils/users')
+const Chat = require('./chatUtils/chat');
+const {connect} = require("mongoose");
+const fs = require('fs');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -14,15 +17,27 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-io.on('connection', (socket) => {
+connect('mongodb://localhost:27017/chat', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => {
+  console.log('Connected to MongoDB database');
+}).catch((err) => {
+  console.error('Error connecting to MongoDB database', err);
+});
 
+io.on('connection', (socket) => {
   socket.on('join-room', ({ username, room }) => { 
 
     const user = userJoin(socket.id, username, room);
-    socket.join(room);
-    socket.emit('message', formatMessage('Chat Rooms', 'Welcome to ChatApp!', null));
 
-    socket.broadcast.to(user.room).emit('message', formatMessage('Chat Rooms', `${user.username} has joined the chat`, null));
+    getChatHistory(socket, room);
+    socket.join(room);
+
+    let message = formatMessage('Chat Rooms', `${user.username} has joined the chat`, null);
+    addMessageToChatHistory(user.room, message);
+
+    socket.broadcast.to(user.room).emit('message', message);
     io.to(user.room).emit('room-users', {
       room: user.room,
       users: getRoomUsers(user.room)
@@ -31,7 +46,9 @@ io.on('connection', (socket) => {
 
   socket.on('chat-message', (msg, file) => {
     const user = getCurrentUser(socket.id);
-    io.to(user.room).emit('message', formatMessage(user.username, msg, file));
+    const message = formatMessage(user.username, msg, file);
+    addMessageToChatHistory(user.room, message);
+    io.to(user.room).emit('message', message);
   });
 
   socket.on('typing', () => {
@@ -47,7 +64,9 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     const user = userLeave(socket.id);
     if (user != null) {
-      io.to(user.room).emit('message', formatMessage("Chat Rooms", `${user.username} has left the chat`));
+      let message = formatMessage("Chat Rooms", `${user.username} has left the chat`, null);
+      addMessageToChatHistory(user.room, message);
+      io.to(user.room).emit('message', message);
     }
     io.to(user.room).emit('room-users', {
       room: user.room,
@@ -56,7 +75,32 @@ io.on('connection', (socket) => {
   });
 });
 
+function addMessageToChatHistory(room, message) {
+  Chat.findOneAndUpdate(
+      { room: room },
+      { $push: { messages: message } },
+      { upsert: true, new: true }
+  ).then(chat => {
+    console.log('Saved message:', message);
+  }).catch(err => {
+    console.error('Error saving message:', err);
+  });
+}
 
+function getChatHistory(socket, room) {
+  Chat.findOne({room: room})
+      .then(chat => {
+        if (chat != null) {
+          chat.messages.forEach(message => {
+            if (message.text) {
+              const msg = formatMessage(message.username, message.text, null);
+              msg.time = message.time;
+              socket.emit('message', msg);
+            }
+          });
+        }
+      })
+}
 
 server.listen(3000, () => {
   console.log('listening on *:3000');
