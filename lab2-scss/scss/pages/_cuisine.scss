@@ -1,0 +1,12 @@
+.dish-container {
+  @extend %themeContainer;
+  padding: 10px;
+}
+
+.dishes-section {
+  @extend %themeSection;
+
+  .dish-container:last-child {
+    margin-bottom: 50px;
+  }
+}

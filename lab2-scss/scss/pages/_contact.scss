@@ -1,0 +1,21 @@
+.dev-container {
+  @extend %themeContainer;
+  padding: 10px;
+}
+
+.devs-section {
+  @extend %themeSection;
+
+  .dev-container:last-child {
+    margin-bottom: 50px;
+  }
+
+}
+
+.contact-section {
+  @extend %themeSection;
+
+  .form-container:last-child {
+    margin-bottom: 50px;
+  }
+}
