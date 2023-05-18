@@ -49,6 +49,11 @@ public class BooksService implements IBooksService {
     }
 
     @Override
+    public Collection<Book> getAvailableBooks() {
+        return bookRepository.findAvailableBooks();
+    }
+
+    @Override
     public void updateBook(long bookId, BookFormDTO bookDTO) {
         Book book = getBook(bookId);
         mapper.map(bookDTO, book);

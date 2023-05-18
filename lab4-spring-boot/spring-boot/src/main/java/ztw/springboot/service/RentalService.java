@@ -40,6 +40,11 @@ public class RentalService implements IRentalService {
     }
 
     @Override
+    public List<Rental> getInactiveRentals() {
+        return rentalRepository.findByReturned(true);
+    }
+
+    @Override
     public Rental getRentalById(long id) {
         return rentalRepository.findById(id).orElseThrow(
                 () -> new NoSuchElementException("Rental with id: '" + id + "' not found")
