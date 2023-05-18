@@ -1,0 +1,154 @@
+QUERIES:
+
+All users (less info):
+query{
+  users{
+    id
+    name
+ 		login
+ 	}
+} 
+
+
+All users (more info):
+query{
+ 	users{
+ 		id
+    name
+ 		login
+ 		todos {
+ 			title
+ 		}
+ 	}
+}
+
+
+User with specified id:
+query{
+ 	user(id: 11){
+ 		id
+    name
+ 		todos {
+ 			title
+      completed
+ 		}
+ 	}
+}
+
+
+All todos (less info):
+query{
+ 	todos{
+ 		id
+    title
+ 	}
+}
+
+
+All todos (more info):
+query{
+ 	todos{
+ 		id
+    title
+    completed
+ 		user {
+ 			id
+      name
+ 		}
+ 	}
+}
+
+
+Todo with specified id:
+query{
+ 	todo(id: 11){
+ 		id
+    title
+    completed
+ 		user {
+ 			id
+      name
+ 		}
+ 	}
+}
+
+
+
+
+
+MUTATIONS:
+
+Create User:
+mutation {
+  createUser(input: { name: "Anna Nowak", email: "an@wp.pl", login: "anowak" }) {
+    id
+    name
+    email
+    login
+  }
+}
+
+
+Update User:
+mutation {
+  updateUser(id: 12, input: { name: "Anna Nowak-Kowalska", email: "an@wp.pl", login: "anowak" }) {
+    id
+    name
+    email
+    login
+  }
+}
+
+
+Delete User:
+mutation{
+  deleteUser(id: 12){
+    id
+    name
+  }
+}
+
+
+
+Create ToDoItem:
+mutation{
+  createToDoItem(input: {title: "Wykapac kota", completed: false, userId: 11}){
+    id
+    title
+    completed
+    user{
+      id
+      name
+    }
+  }
+}
+
+
+Update ToDoItem:
+mutation{
+  updateToDoItem(id: 199, input: {title: "Wyczesac kota", completed: false, userId: 1}){
+    id
+    title
+    completed
+    user{
+      id
+      name
+    }
+  }
+}
+
+
+Delete ToDoItem:
+mutation{
+  deleteToDoItem(id: 205){
+    id
+    title
+    user{
+      id
+      name
+    }
+  }
+}
+
+
+
