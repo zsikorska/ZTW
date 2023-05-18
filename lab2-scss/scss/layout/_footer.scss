@@ -1,0 +1,12 @@
+footer {
+  background-color: $themeBlackColor;
+  margin-bottom: 0;
+  margin-top: 50px;
+  padding: 30px;
+
+  p, a {
+    font-variant: small-caps;
+    color: $themeLightColor;
+    margin: 5px 10px;
+  }
+}

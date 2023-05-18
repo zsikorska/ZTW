@@ -1,0 +1,12 @@
+@mixin colored-container($backgroundColor, $textColor) {
+  background-color: $backgroundColor;
+  p {
+    color: $textColor;
+  }
+}
+
+@mixin shadow($spread) {
+  -webkit-box-shadow: 0 000px 77px $spread rgba(66, 68, 90, 1);
+  -moz-box-shadow: 0 000px 77px $spread rgba(66, 68, 90, 1);
+  box-shadow: 0 000px 77px $spread rgba(66, 68, 90, 1);
+}

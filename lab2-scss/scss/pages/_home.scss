@@ -1,0 +1,51 @@
+//inheritance, mixins
+.overview {
+  @extend %pageContentContainer;
+  @include colored-container($themeGreenColor, $themeLightColor);
+  @include shadow(-24px);
+  flex-direction: column;
+  margin: 50px auto;
+
+  h3 {
+    color: $themeLightColor;
+  }
+}
+
+.meal-container {
+  @extend %themeContainer;
+
+  article {
+    max-width: 50%;
+  }
+
+  .meal-photo {
+    @extend %flexCenteredContainer;
+    flex-direction: column;
+
+    img {
+      width: 400px;
+      height: auto;
+      margin: 20px;
+    }
+  }
+}
+
+.meals-section {
+  @extend %themeSection;
+
+  .meal-container:last-child {
+    margin-bottom: 50px;
+  }
+}
+
+.tip-container {
+  @extend %pageContentContainer;
+  @include colored-container($themeBrownColor, $themeLightColor);
+  @include shadow(-10px);
+  flex-direction: column;
+  padding: 20px 50px;
+
+  h3 {
+    color: $themeLightColor;
+  }
+}

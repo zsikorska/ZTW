@@ -1,0 +1,8 @@
+@function calculate-card-width($numberOfCardsInARow, $cardMargin) {
+  $cardWidth: calc(100% / $numberOfCardsInARow - $cardMargin);
+  @return $cardWidth;
+}
+
+@function change-color($color) {
+  @return adjust-hue($color, 25)
+}
