@@ -1,0 +1,59 @@
+.ad {
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #f9f6f6;
+    box-shadow: 10px 10px 5px #e4e2e2;
+  }
+
+.ad:hover {
+    border: 2px solid #0b0b0b;
+}
+
+table {
+    border-collapse: collapse;
+    width: 90%;
+  }
+  
+td, th {
+    border: 1px solid #d3d1d1;
+    padding: 7px;
+    text-align: center;
+  }
+  
+#edit-ad, #submit-ad {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+#delete-ad {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  #reset-ad {
+    color: #ee3a2d;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  
